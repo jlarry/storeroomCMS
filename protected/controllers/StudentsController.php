@@ -65,6 +65,7 @@ class StudentsController extends Controller
 		$courses = Courses::model()->findAll();
                 $instructors = Instructors::model()->findAll();
                 $tas = Tas::model()->findAll();
+                $image = new Image;
                 //$courselistdata = array();
                 $model=new Students;
                 
@@ -82,7 +83,7 @@ class StudentsController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model, 'courses'=>$courses, 'instructors'=>$instructors, 'tas'=>$tas,
+			'model'=>$model, 'courses'=>$courses, 'instructors'=>$instructors, 'tas'=>$tas, 'image'=>$image
 		));
 	}
 

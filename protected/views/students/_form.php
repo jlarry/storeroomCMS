@@ -57,6 +57,9 @@
 		<?php echo $form->dropDownList($model,'semester', Semester::getSemesters() ,array('prompt'=>'Select Semester')); ?>
 		<?php echo $form->error($model,'semester'); ?>
 	</div>
+         <div class="row">
+            <?php echo CHtml::link('Add Image', '#', $htmlOptions=array('onclick'=>'$("#addImageDialog").dialog("open"); return false;')); ?>
+        </div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', $htmlOptions=array('id'=>'submit', 'name'=>'submit')); ?>
@@ -76,6 +79,21 @@
 ));
         
     echo $this->renderPartial('/courses/_form', array('model'=>Courses::model(), 'instructors'=>$instructors, 'tas'=>$tas));
+
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
+        <?php
+        $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+    'id'=>'addImageDialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Add Student Image',
+        'modal'=>true,
+        'autoOpen'=>false,
+    ),
+));
+        
+    echo $this->renderPartial('/upload/_form', array('image'=>$image));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
