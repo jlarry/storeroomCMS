@@ -17,6 +17,7 @@
         
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/assets/storeroomfunctions.js', CClientScript::POS_BEGIN); ?>
+        <?php //Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/assets/', CClientScript::POS_BEGIN); ?>
 </head>
 
 <body>

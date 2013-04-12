@@ -8,7 +8,7 @@ class UploadController extends Controller
 	}
         
         public function actionUpload(){
-            Yii::import( "xupload.models.XUploadForm" );
+            //Yii::import( "xupload.models.XUploadForm" );
     //Here we define the paths where the files will be stored temporarily
     $path = realpath( Yii::app( )->getBasePath( )."/../images/uploads/tmp/" )."/";
     $publicPath = Yii::app( )->getBaseUrl( )."/images/uploads/tmp/";
@@ -23,7 +23,7 @@ class UploadController extends Controller
     }
  
     //Here we check if we are deleting and uploaded file
-    if( isset( $_GET["_method"] ) ) {
+    /*if( isset( $_GET["_method"] ) ) {
         if( $_GET["_method"] == "delete" ) {
             if( $_GET["file"][0] !== '.' ) {
                 $file = $path.$_GET["file"];
@@ -34,14 +34,14 @@ class UploadController extends Controller
             }
             echo json_encode( true );
         }
-    } else {
-        $model = new XUploadForm;
+    } else { */
+        $model = new Image();
         $model->file = CUploadedFile::getInstance( $model, 'file' );
         //We check that the file was successfully uploaded
         if( $model->file !== null ) {
             //Grab some data
-            $model->mime_type = $model->file->getType( );
-            $model->size = $model->file->getSize( );
+            //$model->mime_type = $model->file->getType( );
+            //$model->size = $model->file->getSize( );
             $model->name = $model->file->getName( );
             //(optional) Generate a random name for our file
             $filename = md5( Yii::app( )->user->id.microtime( ).$model->name);
@@ -63,10 +63,10 @@ class UploadController extends Controller
                  $userImages[] = array(
                     "path" => $path.$filename,
                     //the same file or a thumb version that you generated
-                    "thumb" => $path.$filename,
+                    "thumb" => $publicPath."thumbs".$filename,
                     "filename" => $filename,
-                    'size' => $model->size,
-                    'mime' => $model->mime_type,
+                    //'size' => $model->size,
+                    //'mime' => $model->mime_type,
                     'name' => $model->name,
                 );
                 Yii::app( )->user->setState( 'images', $userImages );
@@ -76,10 +76,10 @@ class UploadController extends Controller
                 // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
                 echo json_encode( array( array(
                         "name" => $model->name,
-                        "type" => $model->mime_type,
-                        "size" => $model->size,
+                        //"type" => $model->mime_type,
+                       // "size" => $model->size,
                         "url" => $publicPath.$filename,
-                        "thumbnail_url" =>$publicPath.$filename,
+                        "thumbnail_url" =>$publicPath."thumbs/".$filename,
                         "delete_url" => $this->createUrl( "upload", array(
                             "_method" => "delete",
                             "file" => $filename
@@ -91,15 +91,15 @@ class UploadController extends Controller
                 echo json_encode( array( 
                     array( "error" => $model->getErrors( 'file' ),
                 ) ) );
-                Yii::log( "XUploadAction: ".CVarDumper::dumpAsString( $model->getErrors( ) ),
-                    CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction" 
-                );
+                //Yii::log( "XUploadAction: ".CVarDumper::dumpAsString( $model->getErrors( ) ),
+                 //   CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction" 
+               // );
             }
         } else {
             throw new CHttpException( 500, "Could not upload file" );
         }
     }
-}
+
         public function getTmpPath(){
             $tmpPath = realpath( Yii::app( )->getBasePath( ).$this->tmpPath).'/';
             return $tmpPath;

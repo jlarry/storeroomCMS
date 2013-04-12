@@ -13,10 +13,10 @@
 class Image extends CFormModel {
         
         public $file;
+        public $name;
         //public $mime_type;
         //public $size;
-        //public $name;
-        public $filename;
+        //public $filename;
 
 
         /**
@@ -29,7 +29,7 @@ class Image extends CFormModel {
                 return array(
                         array('file', 'required'),
                         //array('file', 'file'),
-                        array('file', 'file', 'allowEmpty'=>false, 'types'=>'jpg, jpeg, gif, png', 'maxfiles'=>'1'),
+                        array('file', 'file', 'allowEmpty'=>false, 'types'=>'jpg, jpeg, gif, png', 'maxFiles'=>'1'),
                 );
         }
 
@@ -39,7 +39,7 @@ class Image extends CFormModel {
         public function attributeLabels()
         {
                 return array(
-                        'file'=>'Upload Image File',
+                        'file'=>'Select Image File',
                 );
         }
 }
