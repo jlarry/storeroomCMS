@@ -13,9 +13,9 @@
 class Image extends CFormModel {
         
         public $file;
-        public $mime_type;
-        public $size;
-        public $name;
+        //public $mime_type;
+        //public $size;
+        //public $name;
         public $filename;
 
 
@@ -29,7 +29,7 @@ class Image extends CFormModel {
                 return array(
                         array('file', 'required'),
                         //array('file', 'file'),
-                        array('Image[dogcrap]', 'file', 'types'=>'jpg, jpeg, gif, png'),
+                        array('file', 'file', 'allowEmpty'=>false, 'types'=>'jpg, jpeg, gif, png', 'maxfiles'=>'1'),
                 );
         }
 

@@ -8,7 +8,7 @@
 <?php
 $form=$this->beginWidget('CActiveForm',
         array(
-            'id'=>'upload-form',
+            'id'=>'image-form',
             //'endableAjaxValidation'=>false,
             'enableClientValidation'=>true,
             'htmlOptions'=>array('enctype'=>'multipart/form-data'),
@@ -21,11 +21,11 @@ $form=$this->beginWidget('CActiveForm',
 <?php echo $form->errorSummary($image); ?>
 <div class="row">
 <?php echo $form->labelEx($image, 'file'); ?>
-<?php echo $form->fileField($image, 'dogcrap'); ?>
+<?php echo $form->fileField($image, 'file'); ?>
 <?php echo $form->error($image, 'file'); ?>
 </div>
 <div class="row buttons">
-	<?php echo CHtml::submitButton('Add Image'); ?>
+	<?php echo CHtml::submitButton('Create'); ?>
 </div>
 <?php $this->endWidget(); ?>
 </div>
