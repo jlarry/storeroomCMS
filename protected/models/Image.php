@@ -27,9 +27,9 @@ class Image extends CFormModel {
         public function rules()
         {
                 return array(
-                        array('file', 'required'),
+                        //array('file', 'required'),
                         //array('file', 'file'),
-                        array('file', 'file', 'allowEmpty'=>false, 'types'=>'jpg, jpeg, gif, png', 'maxFiles'=>'1'),
+                        //array('file', 'file', 'allowEmpty'=>false, 'types'=>'jpg, jpeg, gif, png', 'maxFiles'=>'1'),
                 );
         }
 

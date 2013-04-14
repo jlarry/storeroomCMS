@@ -12,6 +12,7 @@ class UploadController extends Controller
     //Here we define the paths where the files will be stored temporarily
     $path = realpath( Yii::app( )->getBasePath( )."/../images/uploads/tmp/" )."/";
     $publicPath = Yii::app( )->getBaseUrl( )."/images/uploads/tmp/";
+    //$testPath = realpath(Yii::app()->getBasePath().);
  
     //This is for IE which doens't handle 'Content-type: application/json' correctly
     header( 'Vary: Accept' );
@@ -47,11 +48,21 @@ class UploadController extends Controller
             $filename = md5( Yii::app( )->user->id.microtime( ).$model->name);
             $filename .= ".".$model->file->getExtensionName( );
             if( $model->validate( ) ) {
+                //check to make sure the directory is available
+                if($path == "/"){
+                    throw new CHttpException( 500, "Application Error. Contact Admin Error:Path does not exist".$path);
+                }
                 //Move our file to our temporary dir
-                $model->file->saveAs( $path.$filename );
-                chmod( $path.$filename, 0777 );
-                //here you can also generate the image versions you need 
+                else{
+                   $model->file->saveAs( $path.$filename );
+                   chmod( $path.$filename, 0777 );
+                   //here you can also generate the image versions you need 
                 //using something like PHPThumb
+                    $file=$path.$filename;
+                    $img = Yii::app()->simpleImage->load($file);
+                    $img->resizeToWidth(100);
+                    $img->save($path.$model->name);
+                }
                 
  
                 //Now we need to save this path to the user's session
@@ -74,18 +85,18 @@ class UploadController extends Controller
                 //Now we need to tell our widget that the upload was succesfull
                 //We do so, using the json structure defined in
                 // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
-                echo json_encode( array( array(
+                echo json_encode( array(
                         "name" => $model->name,
                         //"type" => $model->mime_type,
                        // "size" => $model->size,
-                        "url" => $publicPath.$filename,
+                        "url" => $publicPath.$model->name,
                         "thumbnail_url" =>$publicPath."thumbs/".$filename,
                         "delete_url" => $this->createUrl( "upload", array(
                             "_method" => "delete",
                             "file" => $filename
                         ) ),
                         "delete_type" => "POST"
-                    ) ) );
+                    ) );
             } else {
                 //If the upload failed for some reason we log some data and let the widget know
                 echo json_encode( array( 

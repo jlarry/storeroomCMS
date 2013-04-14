@@ -43,12 +43,11 @@ class Tas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('first_name, last_name, email, semester, year', 'required'),
-			array('first_name, last_name, email, semester, image', 'length', 'max'=>45),
-			array('year', 'length', 'max'=>4),
+			array('first_name, last_name, email, semester', 'required'),
+			array('first_name, last_name, email, semester', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, first_name, last_name, email, semester, year, image', 'safe', 'on'=>'search'),
+			array('id, first_name, last_name, email, semester', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,8 +74,7 @@ class Tas extends CActiveRecord
 			'last_name' => 'Last Name',
 			'email' => 'Email',
 			'semester' => 'Semester',
-			'year' => 'Year',
-			'image' => 'Image',
+
 		);
 	}
 
@@ -96,18 +94,11 @@ class Tas extends CActiveRecord
 		$criteria->compare('last_name',$this->last_name,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('semester',$this->semester,true);
-		$criteria->compare('year',$this->year,true);
-		$criteria->compare('image',$this->image,true);
+
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-        public function beforeValidate() {
-            if($this->isNewRecord){
-                $this->year = date('Y');
-                //$this->semester = Semester::getCurrentSemester();
-            }
-            return parent::beforeValidate();
-        }
+
 }

@@ -8,11 +8,12 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'tas-form',
+        'action'=>Yii::app()->createUrl('tas/create'),
 	'enableAjaxValidation'=>false,
         'enableClientValidation'=>true,
             'clientOptions'=>array(
               'validateOnSubmit'=>true,
-                'afterValidate'=>'js:function(form,data,hasError){
+        'afterValidate'=>'js:function(form,data,hasError){
                     if(!hasError){
                         $.ajax({
                             "type":"POST",
@@ -32,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'first_name'); ?>
-		<?php echo $form->textField($model,'first_name',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'first_name'); ?>
 		<?php echo $form->error($model,'first_name'); ?>
 	</div>
         

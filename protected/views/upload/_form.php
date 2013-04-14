@@ -44,6 +44,8 @@ $form=$this->beginWidget('CActiveForm',
 </div>
 <?php $this->endWidget(); ?>
     <div id="returnImageInfo">
-        <img src=""/><?php ?>
     </div>
+ <script id="imageTemplate" type="text/x-jquery-tmpl">
+		<img src="{{:url}}" />
+</script>
 </div>
