@@ -47,5 +47,10 @@ $form=$this->beginWidget('CActiveForm',
     </div>
  <script id="imageTemplate" type="text/x-jquery-tmpl">
 		<img src="{{:url}}" />
+                <?php 
+                echo CHtml::htmlButton('Add', $htmlOptions=array('id'=>'addImage')); 
+                echo CHtml::ajaxButton('Remove','{{:delete_url}}' ,$ajaxOptions=array(), $htmlOptions=array());
+                echo CHtml::htmlButton('Cancel', $htmlOptions=array('id'=>'cancelImage'));
+                ?>
 </script>
 </div>

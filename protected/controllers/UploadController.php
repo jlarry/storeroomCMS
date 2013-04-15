@@ -91,9 +91,9 @@ class UploadController extends Controller
                        // "size" => $model->size,
                         "url" => $publicPath.$model->name,
                         "thumbnail_url" =>$publicPath."thumbs/".$filename,
-                        "delete_url" => $this->createUrl( "upload", array(
-                            "_method" => "delete",
-                            "file" => $filename
+                        "delete_url" => $this->createUrl( "upload/delete", array(
+                            //"_method" => "delete",
+                            "file" => $model->name,
                         ) ),
                         "delete_type" => "POST"
                     ) );
@@ -118,6 +118,10 @@ class UploadController extends Controller
         public function getSavePath(){
             $savePath = realpath( Yii::app( )->getBasePath( ).$this->savePath).'/';
             return $savePath;
+        }
+        
+        public function actionDelete (){
+            
         }
         
 	// Uncomment the following methods and override them if needed
