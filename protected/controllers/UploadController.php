@@ -2,7 +2,10 @@
 
 class UploadController extends Controller
 {
-	public function actionIndex()
+        //public $tmpPath = "/../images/uploads/tmp/";
+        //public $IMGPUBLICPATH = "/images/uploads/tmp/";
+        
+        public function actionIndex()
 	{
 		$this->render('index');
 	}
@@ -94,6 +97,7 @@ class UploadController extends Controller
                         "delete_url" => $this->createUrl( "upload/delete", array(
                             //"_method" => "delete",
                             "file" => $model->name,
+                            "tmpfile"=>$filename,
                         ) ),
                         "delete_type" => "POST"
                     ) );
@@ -121,7 +125,37 @@ class UploadController extends Controller
         }
         
         public function actionDelete (){
-            
+            if(isset($_GET['file']))
+		{
+                $path = realpath( Yii::app( )->getBasePath( )."/../images/uploads/tmp/")."/";
+                
+                //$publicPath = Yii::app( )->getBaseUrl( ).$this->IMGPUBLICPATH;
+                          $name = $_GET['file'];
+                          $tmpname = $_GET['tmpfile'];
+                          $file = $path.$name;
+                          $tmpfile = $path.$tmpname;
+                          if( is_file( $file )&& is_file($tmpfile)) {
+                                unlink( $file );
+                                unlink( $tmpfile );
+                                Yii::app( )->user->setState( 'images', null );
+                            }
+                            if(Yii::app()->request->isAjaxRequest){
+                                 echo CJSON::encode(array(
+                                     'status'=>'success',
+                                     'data'=>'file deleted',
+                                 ));
+                                 Yii::app()->end();
+                            }
+		
+                else{
+                   if(Yii::app()->request->isAjaxRequest){ 
+                    echo CJSON::encode(array(
+                            'status'=>'error',
+                            'data'=>'appllication error',
+                    ));
+                    }
+                } 
+                }
         }
         
 	// Uncomment the following methods and override them if needed
