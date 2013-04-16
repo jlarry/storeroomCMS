@@ -62,7 +62,7 @@
          <script id="studentImgTmpl" type="text/x-jquery-tmpl">
 		
                 <img src="{{:url}}" />
-                <button id="removeImage" name="removeImage" type="button" onclick="$('#removeImage').deleteImage('{{:delete_url}}'); $('#studentImage').html('');">Remove</button>
+                <button id="removeImage" name="removeImage" type="button" onclick="$('#removeImage').deleteImage('{{:delete_url}}'); $('#studentImage').html(''); $('#addImgButtonStudents').toggle();">Remove Image</button>
                 
 </script>
          <div id="addImgButtonStudents" class="row">
