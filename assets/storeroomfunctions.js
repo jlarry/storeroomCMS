@@ -16,12 +16,26 @@ $.fn.sendImageInput = function(formid){
                             "data":formData,
                             "contentType":false,
                             "processData":false,
-                            "success":function(returndata){$("#returnImageInfo").buildHtml(returndata);}
+                            "success":function(data){$(FormID).buildHtml(data,"#returnImageInfo", "#imageTemplate"); imgData = data;}
         }); 
 };
+var imgData = [];
 
-$.fn.buildHtml = function(jsondata){
-
+$.fn.buildHtml = function(data, tmplcontainer, template){
+var parsedData = $.parseJSON(data);
+$(tmplcontainer).html(
+		$(template).render(parsedData)
+	);
 };
 
+$.fn.deleteImage = function(url){
+    $("#returnImageInfo").html(" ");
+    $.ajax({
+        "type":"GET",
+        "url":url,
+        "dataType":"json",
+        "success":function(data){}
+    });
+};
 
+//var testdata = [{"name":"IMG_0038.JPG","url":"\/storeroom\/images\/uploads\/tmp\/b22cc50e994c909b7c9dc278cc220fea.JPG","thumbnail_url":"\/storeroom\/images\/uploads\/tmp\/thumbs\/b22cc50e994c909b7c9dc278cc220fea.JPG","delete_url":"\/storeroom\/index.php?r=upload\/upload&_method=delete&file=b22cc50e994c909b7c9dc278cc220fea.JPG","delete_type":"POST"}];
