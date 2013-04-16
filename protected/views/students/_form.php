@@ -57,7 +57,15 @@
 		<?php echo $form->dropDownList($model,'semester', Semester::getSemesters() ,array('prompt'=>'Select Semester')); ?>
 		<?php echo $form->error($model,'semester'); ?>
 	</div>
-         <div class="row">
+        <div id="studentImage" class="row">
+        </div>
+         <script id="studentImgTmpl" type="text/x-jquery-tmpl">
+		
+                <img src="{{:url}}" />
+                <button id="removeImage" name="removeImage" type="button" onclick="$('#removeImage').deleteImage('{{:delete_url}}'); $('#studentImage').html('');">Remove</button>
+                
+</script>
+         <div id="addImgButtonStudents" class="row">
             <?php echo CHtml::link('Add Image', '#', $htmlOptions=array('onclick'=>'$("#addImageDialog").dialog("open"); return false;')); ?>
         </div>
 
