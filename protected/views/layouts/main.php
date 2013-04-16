@@ -16,8 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
         
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-        <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/assets/storeroomfunctions.js', CClientScript::POS_BEGIN); ?>
-        <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/assets/jsrender.js', CClientScript::POS_BEGIN); ?>
+        <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/js/storeroomfunctions.js', CClientScript::POS_BEGIN); ?>
+        <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/js/jsrender.js', CClientScript::POS_BEGIN); ?>
 </head>
 
 <body>
