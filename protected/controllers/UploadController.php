@@ -80,8 +80,8 @@ class UploadController extends Controller
                     "thumb" => $publicPath."thumbs".$filename,
                     "filename" => $filename,
                     //'size' => $model->size,
-                    //'mime' => $model->mime_type,
-                    'name' => $model->name,
+                    "mime" => $model->mime_type,
+                    "name" => $model->name,
                 );
                 Yii::app( )->user->setState( 'images', $userImages );
  

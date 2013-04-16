@@ -58,7 +58,7 @@
 
 	<div class="row buttons">
 	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-        <?php echo CHtml::submitButton('Cancel', $htmlOptions=array()); ?>
+        <?php echo CHtml::resetButton('Cancel', array('id'=>'taClrFrmButton','onclick'=>'$("#addTaDialog").dialog("close");')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -62,18 +62,28 @@ class InstructorsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Instructors;
+            $model=new Instructors;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+                $this->performAjaxValidation($model);
 
 		if(isset($_POST['Instructors']))
 		{
 			$model->attributes=$_POST['Instructors'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			if($model->save()){
+                            
+                            if(Yii::app()->request->isAjaxRequest){
+                                 echo CJSON::encode(array(
+                                     'status'=>'success',
+                                     'data'=>$model,
+                                 ));
+                                 Yii::app()->end();
+                            }
 		}
-
+                else{
+                    $this->redirect(array('view','id'=>$model->id));
+                    }
+                }
 		$this->render('create',array(
 			'model'=>$model,
 		));

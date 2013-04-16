@@ -77,7 +77,21 @@ class StudentsController extends Controller
 
 		if(isset($_POST['Students']))
 		{
-			$model->attributes=$_POST['Students'];
+  
+                        $model->attributes=$_POST['Students'];
+                        if( Yii::app( )->user->hasState( 'images' ) ){
+                            //$path = realpath( Yii::app( )->getBasePath( )."/../images/uploads/students/" )."\\";
+                            $path = Yii::app( )->getBaseUrl( )."/images/uploads/students/";
+                            $studentImage = Yii::app( )->user->getState( 'images' );
+                            $file = $studentImage[0]['path'];
+                            $img = Yii::app()->simpleImage->load($file);
+                            $img->resizeToWidth(200);
+                            $img->save($path.$model->first_name.$model->last_name.".".$studentImage[0]['mime']);
+                            $model->image = $path.$studentImage[0]['name'];
+                            Yii::app( )->user->setState( 'images', null );
+                            
+                            
+                        }
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

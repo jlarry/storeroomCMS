@@ -2,8 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-$.fn.addOptionInput = function(returndata, textfield){
-    $('<option selected="select" value="'+returndata.data.id +'">'+textfield+'</option>').appendTo(this);
+$.fn.addOptionInput = function(returndata, textfield, textfield2){
+    if(textfield2){
+        var optionText = textfield + " " + textfield2;
+    }
+    else {
+        var optionText = textfield;
+    }
+    $('<option selected="select" value="'+returndata.data.id +'">'+ optionText +'</option>').appendTo(this);
 };
 
 $.fn.sendImageInput = function(formid){
@@ -37,5 +43,3 @@ $.fn.deleteImage = function(url){
         "success":function(data){}
     });
 };
-
-//var testdata = [{"name":"IMG_0038.JPG","url":"\/storeroom\/images\/uploads\/tmp\/b22cc50e994c909b7c9dc278cc220fea.JPG","thumbnail_url":"\/storeroom\/images\/uploads\/tmp\/thumbs\/b22cc50e994c909b7c9dc278cc220fea.JPG","delete_url":"\/storeroom\/index.php?r=upload\/upload&_method=delete&file=b22cc50e994c909b7c9dc278cc220fea.JPG","delete_type":"POST"}];

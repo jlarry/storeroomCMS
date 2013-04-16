@@ -9,6 +9,21 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'instructors-form',
 	'enableAjaxValidation'=>false,
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+              'validateOnSubmit'=>true,
+                'afterValidate'=>'js:function(form,data,hasError){
+                    if(!hasError){
+                        $.ajax({
+                            "type":"POST",
+                            "url":"'.Yii::app()->createUrl('instructors/create').'",
+                            "dataType":"json",
+                            "data":form.serialize(),
+                            "success":function(returndata){$("#addProfDialog").dialog("close"); $("#instructors-form")[0].reset(); $("#Courses_instructors_id").addOptionInput(returndata,returndata.data.first_name, returndata.data.last_name);},
+        });
+    }
+    }'
+    ),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>

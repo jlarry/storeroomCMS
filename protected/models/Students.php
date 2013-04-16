@@ -50,7 +50,7 @@ class Students extends CActiveRecord
 		return array(
 			array('first_name, last_name, email, semester, cleared, year, courses_id', 'required'),
 			array('courses_id', 'numerical', 'integerOnly'=>true),
-			array('first_name, last_name, email, image', 'length', 'max'=>45),
+			array('first_name, last_name, email', 'length', 'max'=>45),
 			array('semester', 'length', 'max'=>15),
 			array('year', 'length', 'max'=>4),
                         array('cleared', 'length', 'max'=>3),

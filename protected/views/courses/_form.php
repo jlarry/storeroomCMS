@@ -19,7 +19,7 @@
                             "url":"'.Yii::app()->createUrl('courses/create').'",
                             "dataType":"json",
                             "data":form.serialize(),
-                            "success":function(returndata){$("#addCourseDialog").dialog("close"); $("#courses-form")[0].reset(); $("#Students_courses_id").addOptionInput(returndata, returndata.data.name);},
+                            "success":function(returndata){$("#addCourseDialog").dialog("close"); $("#courses-form")[0].reset(); $("#Students_courses_id").addOptionInput(returndata, returndata.data.name, returndata.data.section);},
         });
     }
 }'
@@ -38,19 +38,19 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'semester'); ?>
-		<?php echo CHtml::activeDropDownList($model,'semester', Semester::getSemesters()); ?>
+		<?php echo CHtml::activeDropDownList($model,'semester', Semester::getSemesters(), array('prompt'=>'Select Semester')); ?>
 		<?php echo $form->error($model,'semester'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'section'); ?>
-		<?php echo CHtml::activeDropDownList($model,'section', array('1'=>'Section 1','2'=>'Section 2','3'=>'Section 3')); ?>
+		<?php echo CHtml::activeDropDownList($model,'section', array('1'=>'Section 1','2'=>'Section 2','3'=>'Section 3'), array('prompt'=>'Select Section')); ?>
 		<?php echo $form->error($model,'section'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'instructors_id'); ?>
-		<?php echo CHtml::activeDropDownList($model,'instructors_id',CHtml::listData($instructors, 'id', 'last_name')); ?>
+		<?php echo CHtml::activeDropDownList($model,'instructors_id',CHtml::listData($instructors, 'id', 'last_name'), array('prompt'=>'Select Professor')); ?>
 		<?php echo $form->error($model,'instructors_id'); ?>
 	</div>
         <div class="row">
@@ -59,7 +59,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tas_id'); ?>
-		<?php echo CHtml::activeDropDownList($model,'tas_id',CHtml::listData($tas, 'id', 'last_name')); ?>
+		<?php echo CHtml::activeDropDownList($model,'tas_id',CHtml::listData($tas, 'id', 'last_name'), array('prompt'=>'Select TA')); ?>
 		<?php echo $form->error($model,'tas_id'); ?>
 	</div>
         <div class="row">
@@ -68,7 +68,7 @@
 
 	<div class="row buttons">
 	<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-
+        <?php echo CHtml::resetButton('Cancel', array('id'=>'courseClrFrmButton','onclick'=>'$("#addCourseDialog").dialog("close");')); ?>    
 	</div>
 
 <?php $this->endWidget(); ?>
