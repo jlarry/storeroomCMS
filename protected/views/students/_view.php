@@ -30,7 +30,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('image')); ?>:</b>
-	<?php echo CHtml::encode($data->image); ?>
+	<img src="<?php echo CHtml::encode($data->image); ?>" />
 	<br />
 
 	 

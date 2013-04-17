@@ -80,14 +80,15 @@ class StudentsController extends Controller
   
                         $model->attributes=$_POST['Students'];
                         if( Yii::app( )->user->hasState( 'images' ) ){
-                            //$path = realpath( Yii::app( )->getBasePath( )."/../images/uploads/students/" )."\\";
-                            $path = Yii::app( )->getBaseUrl( )."/images/uploads/students/";
+                            $path = realpath( Yii::app( )->getBasePath( )."/../images/uploads/students/" )."/";
+                            $publicPath = Yii::app( )->getBaseUrl( )."/images/uploads/students/";
                             $studentImage = Yii::app( )->user->getState( 'images' );
                             $file = $studentImage[0]['path'];
                             $img = Yii::app()->simpleImage->load($file);
                             $img->resizeToWidth(200);
-                            $img->save($path.$model->first_name.$model->last_name.".".$studentImage[0]['mime']);
-                            $model->image = $path.$studentImage[0]['name'];
+                            $fileName = $model->first_name.$model->last_name.".".$studentImage[0]['fileExt'];
+                            $img->save($path.$fileName);
+                            $model->image = $publicPath.$fileName;
                             Yii::app( )->user->setState( 'images', null );
                             
                             
