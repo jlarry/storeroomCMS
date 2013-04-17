@@ -86,8 +86,10 @@ class StudentsController extends Controller
                             $file = $studentImage[0]['path'];
                             $img = Yii::app()->simpleImage->load($file);
                             $img->resizeToWidth(200);
-                            $fileName = $model->first_name.$model->last_name.".".$studentImage[0]['fileExt'];
+                            $fileName = substr(microtime( ), 5).$model->first_name.$model->last_name.".".$studentImage[0]['fileExt'];
                             $img->save($path.$fileName);
+                                unlink($studentImage[0]['path']);
+                                unlink($studentImage[0]['thumb']);
                             $model->image = $publicPath.$fileName;
                             Yii::app( )->user->setState( 'images', null );
                             
@@ -134,8 +136,11 @@ class StudentsController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
+		$model = $this->loadModel($id);//->delete();
+                if(!$model->image){
+                    unlink();
+                }
+                $model->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

@@ -76,8 +76,9 @@ class UploadController extends Controller
                 }
                  $userImages[] = array(
                     "path" => $path.$filename,
+                    "thumb" => $path.$model->name,
                     //the same file or a thumb version that you generated
-                    "thumb" => $publicPath."thumbs".$filename,
+                    //"thumb" => $publicPath."thumbs".$filename,
                     "filename" => $filename,
                     //'size' => $model->size,
                     "fileExt" => $model->file->getExtensionName(),
