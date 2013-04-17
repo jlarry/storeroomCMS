@@ -90,6 +90,7 @@ class UploadController extends Controller
                 //We do so, using the json structure defined in
                 // https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
                 echo json_encode( array(
+                        "status"=>"OK",
                         "name" => $model->name,
                         //"type" => $model->mime_type,
                        // "size" => $model->size,
@@ -104,9 +105,10 @@ class UploadController extends Controller
                     ) );
             } else {
                 //If the upload failed for some reason we log some data and let the widget know
-                echo json_encode( array( 
-                    array( "error" => $model->getErrors( 'file' ),
-                ) ) );
+               echo json_encode(
+                    array("status"=>"ERROR", "errorMessage"=>$model->getError( 'file' )));
+                    
+                //) );
                 //Yii::log( "XUploadAction: ".CVarDumper::dumpAsString( $model->getErrors( ) ),
                  //   CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction" 
                // );

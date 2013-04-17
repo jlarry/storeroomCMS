@@ -22,16 +22,22 @@ $.fn.sendImageInput = function(formid){
                             "data":formData,
                             "contentType":false,
                             "processData":false,
-                            "success":function(data){$(FormID).buildHtml(data,"#returnImageInfo", "#imageTemplate"); imgData = data;}
+                            "success":function(data){$(FormID).buildHtml(data,"#returnImageInfo", "#imageTemplate"); imgData = data;},
+                            
         }); 
 };
 var imgData = [];
 
 $.fn.buildHtml = function(data, tmplcontainer, template){
 var parsedData = $.parseJSON(data);
+if(parsedData.status === "OK"){
 $(tmplcontainer).html(
 		$(template).render(parsedData)
 	);
+}
+else{
+    $("#imgErrorContainer").html($("#imgErrorTemplate").render(parsedData));
+}
 };
 
 $.fn.deleteImage = function(url){
