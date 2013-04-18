@@ -37,6 +37,7 @@ $(tmplcontainer).html(
 }
 else{
     $("#imgErrorContainer").html($("#imgErrorTemplate").render(parsedData));
+    $("#imgErrorDialog").dialog("open");
 }
 };
 

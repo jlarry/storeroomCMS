@@ -16,7 +16,8 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`user` (
   `password` VARCHAR(45) NOT NULL ,
   `title` VARCHAR(45) NOT NULL ,
   `email` VARCHAR(45) NOT NULL ,
-  `image` VARCHAR(45) NULL ,
+  `image` VARCHAR(245) NULL ,
+  `lastlogin` DATETIME NULL ,
   PRIMARY KEY (`user_id`) )
 ENGINE = InnoDB;
 
@@ -84,25 +85,41 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `storeroom`.`itemcategories`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `storeroom`.`itemcategories` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `storeroom`.`items`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
   `id` INT NOT NULL ,
-  `itemtype` VARCHAR(45) NOT NULL ,
-  `description` VARCHAR(45) NULL ,
+  `storeroomid` VARCHAR(20) NULL ,
   `niunumber` INT NULL ,
+  `description` VARCHAR(45) NULL ,
   `po` INT NULL ,
   `cost` DECIMAL(10) NULL ,
   `purchasedate` DATE NULL ,
   `added` DATETIME NOT NULL ,
-  `image` VARCHAR(45) NULL ,
-  `storeroomid` VARCHAR(20) NULL ,
+  `image` VARCHAR(245) NULL ,
   `kits_id` INT UNSIGNED NOT NULL ,
+  `itemcategories_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_items_kits1_idx` (`kits_id` ASC) ,
+  INDEX `fk_items_itemcategories1_idx` (`itemcategories_id` ASC) ,
   CONSTRAINT `fk_items_kits1`
     FOREIGN KEY (`kits_id` )
     REFERENCES `storeroom`.`kits` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_items_itemcategories1`
+    FOREIGN KEY (`itemcategories_id` )
+    REFERENCES `storeroom`.`itemcategories` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

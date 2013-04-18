@@ -13,6 +13,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Students</h1>
+<h1>Add a Student</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model,'courses'=>$courses, 'instructors'=>$instructors, 'tas'=>$tas, 'image'=>$image)); ?>
+
+    <?php echo $this->renderPartial('_form', array('model'=>$model,'courses'=>$courses, 'instructors'=>$instructors, 'tas'=>$tas, 'image'=>$image)); ?>
+<?php echo $this->renderPartial('/upload/_error');?>
