@@ -11,8 +11,11 @@ class ItemImageController extends Controller
 
 	public function actionIndex()
 	{
-            $imgDataProvider = new CActiveDataProvider('Itemimage');
-            $this->render('index', array('imgDataProvider'=>$imgDataProvider));
+            $publicPath = Yii::app()->getBaseUrl()."/images/items/";
+            
+            $itemImages = new CActiveDataProvider('Itemimage');
+            echo json_encode($itemImages);
+            //$this->render('index');
 	}
 
 	// Uncomment the following methods and override them if needed
