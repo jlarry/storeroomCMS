@@ -75,12 +75,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `storeroom`.`itemimage`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `storeroom`.`itemimage` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `filename` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `storeroom`.`kits`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`kits` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `storeroomid` VARCHAR(20) NOT NULL ,
-  PRIMARY KEY (`id`) )
+  `itemimage_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_kits_itemimage1_idx` (`itemimage_id` ASC) ,
+  CONSTRAINT `fk_kits_itemimage1`
+    FOREIGN KEY (`itemimage_id` )
+    REFERENCES `storeroom`.`itemimage` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -106,12 +123,13 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
   `cost` DECIMAL(10) NULL ,
   `purchasedate` DATE NULL ,
   `added` DATETIME NOT NULL ,
-  `image` VARCHAR(245) NULL ,
   `kits_id` INT UNSIGNED NOT NULL ,
   `itemcategories_id` INT NOT NULL ,
+  `itemimage_id` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_items_kits1_idx` (`kits_id` ASC) ,
   INDEX `fk_items_itemcategories1_idx` (`itemcategories_id` ASC) ,
+  INDEX `fk_items_itemimage1_idx` (`itemimage_id` ASC) ,
   CONSTRAINT `fk_items_kits1`
     FOREIGN KEY (`kits_id` )
     REFERENCES `storeroom`.`kits` (`id` )
@@ -120,6 +138,11 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
   CONSTRAINT `fk_items_itemcategories1`
     FOREIGN KEY (`itemcategories_id` )
     REFERENCES `storeroom`.`itemcategories` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_items_itemimage1`
+    FOREIGN KEY (`itemimage_id` )
+    REFERENCES `storeroom`.`itemimage` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
