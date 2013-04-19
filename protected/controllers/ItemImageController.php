@@ -11,6 +11,7 @@ class ItemImageController extends Controller
 
 	public function actionIndex()
 	{
+            
             $imgDataProvider = new CActiveDataProvider('Itemimage');
             $this->render('index', array('imgDataProvider'=>$imgDataProvider));
 	}
