@@ -11,10 +11,10 @@ class ItemImageController extends Controller
 
 	public function actionIndex()
 	{
-            $publicPath = Yii::app()->getBaseUrl()."/images/items/";
+            //$publicPath = Yii::app()->getBaseUrl()."/images/items/";
             
-            $itemImages = new CActiveDataProvider('Itemimage');
-            echo json_encode($itemImages);
+           $itemImages = Itemimage::model()->findAll();
+            echo CJSON::encode($itemImages);
             //$this->render('index');
 	}
 

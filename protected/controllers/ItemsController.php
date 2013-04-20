@@ -65,6 +65,7 @@ class ItemsController extends Controller
 		$model=new Items;
                 $kits=Kits::model()->findAll();
                 $itemcategories=Itemcategories::model()->findAll();
+                $image = new Image;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -77,7 +78,7 @@ class ItemsController extends Controller
 		}
 
 		$this->render('create',array(
-			'model'=>$model, 'kits'=>$kits, 'itemcategories'=>$itemcategories,
+			'model'=>$model, 'kits'=>$kits, 'itemcategories'=>$itemcategories, 'image'=>$image,
 		));
 	}
 

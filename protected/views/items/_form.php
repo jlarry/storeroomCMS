@@ -89,8 +89,8 @@
         'autoOpen'=>false,
     ),
 ));
-        
- $this->renderPartial('/itemimage/index');
+     
+ $this->renderPartial('/itemimage/index', array('image'=>$image));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>

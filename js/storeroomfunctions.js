@@ -28,6 +28,10 @@ $.fn.sendImageInput = function(formid){
 };
 var imgData = [];
 
+$.fn.buildImgList = function(data, tmplcontainer, template){
+    $(tmplcontainer).html($(template).render(data));
+};
+                    
 $.fn.buildHtml = function(data, tmplcontainer, template){
 var parsedData = $.parseJSON(data);
 if(parsedData.status === "OK"){
