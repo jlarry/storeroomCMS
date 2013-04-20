@@ -53,7 +53,7 @@
 	</div>
 
 	<div class="row">
-            <?php echo CHtml::button('Select Image', $htmlOptions=array('id'=>'selectImgButton', 'onclick'=>'$("#selectImgDialog").dialog("open");')); ?>
+            <?php echo CHtml::button('Select Image', $htmlOptions=array('id'=>'selectImgButton', 'onclick'=>'$("#selectImgDialog").dialog("open"); $("#selectImgDialog").listImages();')); ?>
 	</div>
 
 	<div class="row">
@@ -90,7 +90,7 @@
     ),
 ));
         
- //echo '<iframe src="'.Yii::app()->createUrl('/itemimage/index').'"seamless></iframe>';
+ $this->renderPartial('/itemimage/index');
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
