@@ -15,4 +15,4 @@ $this->menu=array(
 
 <h1>Add Equipment</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'kits'=>$kits, 'itemcategories'=>$itemcategories, 'image'=>$image,)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'kits'=>$kits, 'itemcategories'=>$itemcategories, 'itemImage'=>$itemImage)); ?>

@@ -14,10 +14,12 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/storeroomCMS.css" />
         
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/js/storeroomfunctions.js', CClientScript::POS_BEGIN); ?>
         <?php Yii::app()->clientScript->registerScriptFile('http://localhost/storeroom/js/jsrender.js', CClientScript::POS_BEGIN); ?>
+        <?php Yii::app()->clientScript->registerScriptFile('http://code.jquery.com/ui/1.10.2/jquery-ui.js', CClientScript::POS_BEGIN); ?>
 </head>
 
 <body>

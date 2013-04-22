@@ -26,10 +26,11 @@ $.fn.sendImageInput = function(formid){
                             
         }); 
 };
+//var to hold the return json data containing uploaded image information.  
 var imgData = [];
 
 $.fn.buildImgList = function(data, tmplcontainer, template){
-    $(tmplcontainer).html($(template).render(data));
+   $(tmplcontainer).html($(template).render(data));
 };
                     
 $.fn.buildHtml = function(data, tmplcontainer, template){
@@ -54,3 +55,8 @@ $.fn.deleteImage = function(url){
         "success":function(data){}
     });
 };
+$.fn.addSelectedImg = function(event){
+    event.preventDefault();
+    var img = $(this).html();
+    $("#itemImgContainer").html(img);
+}

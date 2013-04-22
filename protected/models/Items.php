@@ -56,7 +56,7 @@ class Items extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, added, kits_id, itemcategories_id', 'required'),
+			array('id, added, storeroomid, description, itemcategories_id', 'required'),
 			array('id, niunumber, po, itemcategories_id, itemimage_id', 'numerical', 'integerOnly'=>true),
 			array('storeroomid', 'length', 'max'=>20),
 			array('description', 'length', 'max'=>45),
@@ -98,7 +98,7 @@ class Items extends CActiveRecord
 			'id' => 'ID',
 			'storeroomid' => 'Storeroom ID',
 			'niunumber' => 'NIU Property #',
-			'description' => 'Description',
+			'description' => 'Description or Model',
 			'po' => 'PO',
 			'cost' => 'Cost',
 			'purchasedate' => 'Purchase Date',

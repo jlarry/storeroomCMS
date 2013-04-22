@@ -1,6 +1,6 @@
 <?php
-/* Model Image
- * tempalte for partial render of a file field for student image upload dialog box
+/*
+ * Partial template for add equipment image form in the add image dialog box.
  */
 ?>
 <div class="form">
@@ -11,20 +11,20 @@ $form=$this->beginWidget('CActiveForm',
             'id'=>'image-form',
             //'endableAjaxValidation'=>false,
             'enableClientValidation'=>false,
-            'action'=>Yii::app()->createUrl('upload/upload'),
+            'action'=>Yii::app()->createUrl('itemimage/add'),
             'htmlOptions'=>array('enctype'=>'multipart/form-data'),
             'clientOptions'=>array(
                 'validateOnSubmit'=>true,
                             )
         ));
 ?>
-
+<!-- Add equipment image dialog form -->
     <p class="note">Fields with <span class="required">*</span> are required.</p>
-<?php echo $form->errorSummary($image); ?>
+<?php echo $form->errorSummary($itemImage); ?>
 <div class="row">
-<?php echo $form->labelEx($image, 'file'); ?>
-<?php echo $form->fileField($image, 'file', $htmlOptions=array('onchange'=>'$("#Image_file").sendImageInput("#image-form");')); ?>
-<?php echo $form->error($image, 'file'); ?>
+<?php echo $form->labelEx($itemImage, 'file'); ?>
+<?php echo $form->fileField($itemImage, 'file', $htmlOptions=array('onchange'=>'$("#Image_file").sendImageInput("#image-form");')); ?>
+<?php echo $form->error($itemImage, 'file'); ?>
 </div>
 
 <?php $this->endWidget(); ?>
@@ -33,7 +33,7 @@ $form=$this->beginWidget('CActiveForm',
  <script id="imageTemplate" type="text/x-jquery-tmpl">
 
                 <img src="{{:url}}" />
-            <button id="addImg" name="addImg" type="button" onclick="$('#addImg').buildHtml(imgData, '#studentImage', '#studentImgTmpl'); $('#addImageDialog').dialog('close'); $('#addImgButtonStudents').toggle();">Add</button>    
+            <button id="addImg" name="addImg" type="button" onclick="$('#addImg').buildHtml(imgData, '#itemImgContainer', '#itemImgTmpl'); $('#addImgDialog').dialog('close'); $('#selectImgButton').toggle();">Add</button>    
             <button id="removeImage" name="removeImage" type="button" onclick="$('#removeImage').deleteImage('{{:delete_url}}');">Remove</button>
 </script>
 </div>

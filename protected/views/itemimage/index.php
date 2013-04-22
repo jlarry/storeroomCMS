@@ -16,19 +16,21 @@
     ),
 ));
         
- $this->renderPartial('/upload/_form', array('image'=>$image));
+ $this->renderPartial('/itemimage/_form', array('itemImage'=>$itemImage));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
 <div id="buttonContainer"><?php echo CHtml::htmlButton('Add Image', $htmlOptions=array('id'=>'addImgButton', 'onclick'=>'$("#addImgDialog").dialog("open");')); ?></div>
 <!-- this container holds the image select template -->
-<div id="imgSelectContainer"></div>
+<div id="imgListContainer">
+    <ul id="imgUlList">
+    </ul>
+</div>
+
 <!-- end container -->
 <!-- this template creates the image select list of images for the image select dialog box -->
 <script id="imgSelectTmpl" type="text/x-jquery-tmpl">
-        <div id="itemImg">
-            <p>{{:filename}}</p>
-        </div>
+    <li><a href="#" id="itemImg" onclick="$(this).addSelectedImg(event);"><img src="<?php echo Yii::app()->getBaseUrl().'/images/items/'; ?>{{:filename}}" width="50" height="50">{{:filename}}</a></li>
 </script>
 <!-- End template -->
 <!-- This script makes an ajax call to item/index to populate the image select dialog box -->
@@ -39,8 +41,9 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
                             "url":"http://localhost/storeroom/index.php?r=itemimage/index",
                             //"data":formData,
                             "dataType":"json",
-                            "success":function(data){$("#imgSelectContainer").buildImgList(data,"#imgSelectContainer", "#imgSelectTmpl");}
+                            "success":function(data){$("#imgListContainer").buildImgList(data,"#imgUlList", "#imgSelectTmpl"); imgData = data;}
                             
         });
     };  
 </script>
+

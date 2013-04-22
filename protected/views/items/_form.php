@@ -53,6 +53,7 @@
 	</div>
 
 	<div class="row">
+            <div id="itemImgContainer"></div>
             <?php echo CHtml::button('Select Image', $htmlOptions=array('id'=>'selectImgButton', 'onclick'=>'$("#selectImgDialog").dialog("open"); $("#selectImgDialog").listImages();')); ?>
 	</div>
 
@@ -90,8 +91,12 @@
     ),
 ));
      
- $this->renderPartial('/itemimage/index', array('image'=>$image));
+$this->renderPartial('/itemimage/index',array('itemImage'=>$itemImage));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
-</div><!-- form -->
+</div>
+<script id="itemImgTmpl" type="text/x-jquery-tmpl" >
+<img src="{{:url}}" />
+<button id="removeImage" name="removeImage" type="button" onclick="$('#removeImage').deleteImage('{{:delete_url}}'); $('#itemImgContainer').html(' '); $('#selectImgButton').toggle();">Remove Image</button>
+</script>
