@@ -1,5 +1,5 @@
 <?php
-/*
+/* Add item image form. /views/itemimage/_form.php
  * Partial template for add equipment image form in the add image dialog box.
  */
 ?>
@@ -28,6 +28,7 @@ $form=$this->beginWidget('CActiveForm',
 </div>
 
 <?php $this->endWidget(); ?>
+    <!-- holds the imageTemplate for image data added via this form -->
     <div id="returnImageInfo">
     </div>
  <script id="imageTemplate" type="text/x-jquery-tmpl">

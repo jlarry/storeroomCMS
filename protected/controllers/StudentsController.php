@@ -84,21 +84,27 @@ class StudentsController extends Controller
                             $publicPath = Yii::app( )->getBaseUrl( )."/images/uploads/students/";
                             $studentImage = Yii::app( )->user->getState( 'images' );
                             $file = $studentImage[0]['path'];
-                            $img = Yii::app()->simpleImage->load($file);
-                            $img->resizeToWidth(200);
-                            $fileName = substr(microtime( ), 5).$model->first_name.$model->last_name.".".$studentImage[0]['fileExt'];
-                            $img->save($path.$fileName);
-                                unlink($studentImage[0]['path']);
-                                unlink($studentImage[0]['thumb']);
-                            $model->image = $publicPath.$fileName;
-                            Yii::app( )->user->setState( 'images', null );
-                            
-                            
+                            if(Yii::app()->simpleImage->load($file)){
+                                $img=Yii::app()->simpleImage->load($file);
+                                $img->resizeToWidth(200);
+                                $fileName = substr(microtime( ), 5).$model->first_name.$model->last_name.".".$studentImage[0]['fileExt'];
+                                $img->save($path.$fileName);
+                                    unlink($studentImage[0]['path']);
+                                    unlink($studentImage[0]['thumb']);
+                                $model->image = $publicPath.$fileName;
+                                Yii::app( )->user->setState( 'images', null );
+                            }
+                            else{
+                                Yii::app( )->user->setState( 'images', null );
+                                throw new CHttpException( 500, "Wrong Image file or Image file does not exsist" );
+                            }
                         }
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
-
+               if( Yii::app( )->user->hasState( 'images' ) ){
+                   Yii::app( )->user->setState( 'images', null );
+               }
 		$this->render('create',array(
 			'model'=>$model, 'courses'=>$courses, 'instructors'=>$instructors, 'tas'=>$tas, 'image'=>$image
 		));

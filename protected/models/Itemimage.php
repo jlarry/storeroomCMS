@@ -39,7 +39,7 @@ class Itemimage extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('filename', 'required'),
+			array('filename, name, itemcategories_id', 'required'),
 			array('filename', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -57,6 +57,7 @@ class Itemimage extends CActiveRecord
 		return array(
 			'items' => array(self::HAS_MANY, 'Items', 'itemimage_id'),
 			'kits' => array(self::HAS_MANY, 'Kits', 'itemimage_id'),
+                        //'itemcategories_id'=>array(self::HAS_ONE, ),
 		);
 	}
 
@@ -68,6 +69,8 @@ class Itemimage extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'filename' => 'Filename',
+                        'name'=>'image name',
+                        'itemcategories_id'=>'Image Category',
 		);
 	}
 

@@ -53,11 +53,12 @@ class UploadController extends Controller
             if( $model->validate( ) ) {
                 //check to make sure the directory is available
                 if($path == "/"){
+                    Yii::app( )->user->setState( 'images', null );
                     throw new CHttpException( 500, "Application Error. Contact Admin Error:Path does not exist".$path);
                 }
                 //Move our file to our temporary dir
                 else{
-                   $model->file->saveAs( $path.$filename );
+                   if($model->file->saveAs( $path.$filename )){;
                    chmod( $path.$filename, 0777 );
                    //here you can also generate the image versions you need 
                 //using something like PHPThumb
@@ -65,7 +66,14 @@ class UploadController extends Controller
                     $img = Yii::app()->simpleImage->load($file);
                     $img->resizeToWidth(100);
                     $img->save($path.$model->name);
-                }
+                   }
+                    else {
+                        Yii::app( )->user->setState( 'images', null );
+               echo json_encode(
+                       array("status"=>"ERROR", "errorMessage"=>"File does not exsist"));
+                    }
+                   }
+                
                 
  
                 //Now we need to save this path to the user's session
@@ -105,8 +113,9 @@ class UploadController extends Controller
                     ) );
             } else {
                 //If the upload failed for some reason we log some data and let the widget know
+                Yii::app( )->user->setState( 'images', null );
                echo json_encode(
-                    array("status"=>"ERROR", "errorMessage"=>$model->getError( 'file' )));
+                       array("status"=>"ERROR", "errorMessage"=>$model->getError( 'file' )));
                     
                 //) );
                 //Yii::log( "XUploadAction: ".CVarDumper::dumpAsString( $model->getErrors( ) ),
