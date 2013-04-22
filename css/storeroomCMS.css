@@ -22,8 +22,9 @@
     height: 100px;
     text-decoration: none;
     display: block;
-}
-#imgListContainer li {
     text-align: center;
-    
+}
+#imgListContainer a:hover {
+    background: #666666;
+    text-decoration: underline;
 }

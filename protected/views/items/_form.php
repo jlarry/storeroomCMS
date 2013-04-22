@@ -91,6 +91,9 @@
         'width'=>'450',
         'height'=>'600',
         'resizable'=>false,
+        'buttons'=>array('Add Image'=>'js:function(){$("#addImgDialog").dialog("open");}',
+            'Cancel'=>'js:function(){$("#selectImgDialog").dialog("close");}',
+            ),
     ),
 ));
      

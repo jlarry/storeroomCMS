@@ -20,7 +20,6 @@
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
-<div id="buttonContainer"><?php echo CHtml::htmlButton('Add Image', $htmlOptions=array('id'=>'addImgButton', 'onclick'=>'$("#addImgDialog").dialog("open");')); ?></div>
 <!-- this container holds the image select template -->
 <div id="imgListContainer">
     <ul id="imgUlList">
