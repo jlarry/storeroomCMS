@@ -18,8 +18,12 @@
     margin-bottom: 3px;
     background: #CCCCCC;
     border-bottom: 1px solid;
+    width: 400px;
+    height: 100px;
     text-decoration: none;
     display: block;
-    text-align: center;
 }
-
+#imgListContainer li {
+    text-align: center;
+    
+}

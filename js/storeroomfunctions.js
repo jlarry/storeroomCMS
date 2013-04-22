@@ -59,4 +59,4 @@ $.fn.addSelectedImg = function(event){
     event.preventDefault();
     var img = $(this).html();
     $("#itemImgContainer").html(img);
-}
+};

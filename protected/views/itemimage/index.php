@@ -30,7 +30,7 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
 <!-- end container -->
 <!-- this template creates the image select list of images for the image select dialog box -->
 <script id="imgSelectTmpl" type="text/x-jquery-tmpl">
-    <li><a href="#" id="itemImg" onclick="$(this).addSelectedImg(event);"><img src="<?php echo Yii::app()->getBaseUrl().'/images/items/'; ?>{{:filename}}" width="50" height="50">{{:filename}}</a></li>
+    <li><a href="#" id="itemImg" onclick="$(this).addSelectedImg(event);">{{:filename}}</a></li>
 </script>
 <!-- End template -->
 <!-- This script makes an ajax call to item/index to populate the image select dialog box -->

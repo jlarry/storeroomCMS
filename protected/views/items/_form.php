@@ -88,6 +88,9 @@
         'title'=>'Select or Add Image',
         'modal'=>true,
         'autoOpen'=>false,
+        'width'=>'450',
+        'height'=>'600',
+        'resizable'=>false,
     ),
 ));
      
