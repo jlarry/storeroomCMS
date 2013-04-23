@@ -56,7 +56,11 @@ $.fn.deleteImage = function(url){
     });
 };
 $.fn.addSelectedImg = function(event){
-    event.preventDefault();
+    //event.preventDefault();
     var imgUrl = $("img", this).attr('src');
     $("#itemImgContainer").html('<img src="'+imgUrl+'"/>');
 };
+//adds click to <li> image selection list in select image dialog box for adding Equipment
+$("#itemUlList li").live('click', function(evt){
+    $(this).addSelectedImg(evt);
+});

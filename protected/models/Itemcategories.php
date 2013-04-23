@@ -54,6 +54,7 @@ class Itemcategories extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'items' => array(self::HAS_MANY, 'Items', 'itemcategories_id'),
+                        'itemimage'=>array(self::HAS_MANY, 'Itemimage', 'itemcategories_id')
 		);
 	}
 
