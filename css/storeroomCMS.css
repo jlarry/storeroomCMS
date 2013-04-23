@@ -17,14 +17,22 @@
     
     margin-bottom: 3px;
     background: #CCCCCC;
-    border-bottom: 1px solid;
-    width: 400px;
-    height: 100px;
     text-decoration: none;
     display: block;
-    text-align: center;
 }
+
 #imgListContainer a:hover {
     background: #666666;
     text-decoration: underline;
+}
+
+#imgListContainer ul p {
+    padding: 3px;
+    float: left;
+}
+
+#itemImage {
+    width: 100px;
+    height: 100px;
+    border: solid black 1px;
 }

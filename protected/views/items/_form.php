@@ -55,6 +55,7 @@
 	<div class="row">
             <div id="itemImgContainer">
                 <!-- This area dynamically filled by addImageSelected and add new image function is triggered via the selectImgDialog box -->
+           
             </div>
 	</div>
         <div class="row">

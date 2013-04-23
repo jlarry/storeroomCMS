@@ -57,6 +57,6 @@ $.fn.deleteImage = function(url){
 };
 $.fn.addSelectedImg = function(event){
     event.preventDefault();
-    var img = $(this).html();
-    $("#itemImgContainer").html(img);
+    var imgUrl = $("img", this).attr('src');
+    $("#itemImgContainer").html('<img src="'+imgUrl+'"/>');
 };
