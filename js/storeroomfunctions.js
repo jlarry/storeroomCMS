@@ -57,10 +57,20 @@ $.fn.deleteImage = function(url){
 };
 $.fn.addSelectedImg = function(event){
     //event.preventDefault();
-    var imgUrl = $("img", this).attr('src');
-    $("#itemImgContainer").html('<img src="'+imgUrl+'"/>');
+    $("#selectImgDialog").dialog("close");
+    $("#selectImgButton").toggle();
+    //$("#removeImgButton").toggle();
+    //var imgUrl = $("img", this).attr('src');
+    $("#itemImgContainer").html($(this).html() + '<button id="removeImgButton" type="button">Remove Image</button>');
+    //'<img src="'+imgUrl+'"/><button id="removeImgButton" type="button">Remove Image</button>'
+    
 };
 //adds click to <li> image selection list in select image dialog box for adding Equipment
 $("#itemUlList li").live('click', function(evt){
     $(this).addSelectedImg(evt);
+});
+
+$("#removeImgButton").live('click', function(evt){
+    $("#itemImgContainer").html(" ");
+    $("#selectImgButton").toggle();
 });

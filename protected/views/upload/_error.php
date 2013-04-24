@@ -12,6 +12,7 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
         'title'=>'ERROR:',
         'autoOpen'=>false,
         'modal'=>true,
+        'buttons'=>array('OK'=>'js:function("#imgErrorDialog").dialog("close")'),
     ),
 ));
 

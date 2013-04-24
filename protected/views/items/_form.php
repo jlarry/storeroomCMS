@@ -64,11 +64,11 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'kits_id'); ?>
-		<?php echo $form->dropDownList($model, 'kits_id', CHtml::listData($kits,'id', 'storeroomid'),array('prompt'=>'Kits')); ?>
+		<?php echo $form->dropDownList($model, 'kits_id', CHtml::listData($kits,'id', 'storeroomid'),array('prompt'=>'Groups')); ?>
 		<?php echo $form->error($model,'kits_id'); ?>
 	</div>
         <div class="row">
-            <?php echo CHtml::button('Add Kit', $htmlOptions=array('id'=>'addKitButton')); ?>
+            <?php echo CHtml::button('Add Group', $htmlOptions=array('id'=>'addGroupButton', 'onclick'=>'$("#addGroupDialog").dialog("open")')); ?>
         </div>
 
 	<div class="row">
@@ -77,7 +77,7 @@
 		<?php echo $form->error($model,'itemcategories_id'); ?>
 	</div>
         <div class="row">
-            <?php echo CHtml::button('Add Category', $htmlOptions=array('id'=>'addCatButton')); ?>
+            <?php echo CHtml::button('Add Category', $htmlOptions=array('id'=>'addCatButton', 'onclick'=>'$("#addCatDialog").dialog("open")')); ?>
         </div>
 
 	<div class="row buttons">
@@ -103,6 +103,44 @@
 ));
      
 $this->renderPartial('/itemimage/index',array('itemImage'=>$itemImage));
+
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
+        <?php
+        $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+    'id'=>'addCatDialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Add New Category',
+        'modal'=>true,
+        'autoOpen'=>false,
+        'resizable'=>true,
+        'buttons'=>array('Save'=>'js:function(){$("#addCatDialog").dialog("close");}',
+            'Cancel'=>'js:function(){$("#addCatDialog").dialog("close");}',
+            ),
+    ),
+));
+     
+//$this->renderPartial('/itemimage/index',array('itemImage'=>$itemImage));
+
+$this->endWidget('zii.widgets.jui.CJuiDialog');
+?>
+ <?php
+        $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
+    'id'=>'addGroupDialog',
+    // additional javascript options for the dialog plugin
+    'options'=>array(
+        'title'=>'Add New Group',
+        'modal'=>true,
+        'autoOpen'=>false,
+        'resizable'=>true,
+        'buttons'=>array('Save'=>'js:function(){$("#addGroupDialog").dialog("close");}',
+            'Cancel'=>'js:function(){$("#addGroupDialog").dialog("close");}',
+            ),
+    ),
+));
+     
+//$this->renderPartial('/itemimage/index',array('itemImage'=>$itemImage));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>

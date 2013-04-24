@@ -18,6 +18,8 @@
 
 #itemUlList li h3 {
     font: bold 15px/1.5 Helvetica, Verdana, sans-serif;
+    padding: 0px;
+    margin: 0px;
 }
 
 #itemUlList li p {
