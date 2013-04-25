@@ -115,13 +115,13 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
         'modal'=>true,
         'autoOpen'=>false,
         'resizable'=>true,
-        'buttons'=>array('Save'=>'js:function(){$("#addCatDialog").dialog("close");}',
+        'buttons'=>array('Save'=>'js:function(){$("#itemscategories-form").submit(); $("#addCatDialog").dialog("close");}',
             'Cancel'=>'js:function(){$("#addCatDialog").dialog("close");}',
             ),
     ),
 ));
      
-//$this->renderPartial('/itemimage/index',array('itemImage'=>$itemImage));
+$this->renderPartial('/itemsCategories/_form',array('model'=>  ItemCategories::model()));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>
@@ -134,13 +134,13 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
         'modal'=>true,
         'autoOpen'=>false,
         'resizable'=>true,
-        'buttons'=>array('Save'=>'js:function(){$("#addGroupDialog").dialog("close");}',
+        'buttons'=>array('Save'=>'js:function(){$("#kits-form").submit();$("#addGroupDialog").dialog("close");}',
             'Cancel'=>'js:function(){$("#addGroupDialog").dialog("close");}',
             ),
     ),
 ));
      
-//$this->renderPartial('/itemimage/index',array('itemImage'=>$itemImage));
+$this->renderPartial('/kits/_form',array('model'=>Kits::model()));
 
 $this->endWidget('zii.widgets.jui.CJuiDialog');
 ?>

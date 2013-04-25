@@ -41,7 +41,7 @@ class Kits extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('storeroomid, itemimage_id', 'required'),
+			array('storeroomid', 'required'),
 			array('itemimage_id', 'numerical', 'integerOnly'=>true),
 			array('storeroomid', 'length', 'max'=>20),
 			// The following rule is used by search().
@@ -71,7 +71,7 @@ class Kits extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'storeroomid' => 'Storeroomid',
+			'storeroomid' => 'Storeroom ID',
 			'itemimage_id' => 'Itemimage',
 		);
 	}

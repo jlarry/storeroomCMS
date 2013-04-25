@@ -65,7 +65,7 @@ class Itemcategories extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Category Name',
 		);
 	}
 

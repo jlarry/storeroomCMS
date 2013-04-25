@@ -17,4 +17,4 @@ $this->menu=array(
 
 
     <?php echo $this->renderPartial('_form', array('model'=>$model,'courses'=>$courses, 'instructors'=>$instructors, 'tas'=>$tas, 'image'=>$image)); ?>
-<?php echo $this->renderPartial('/upload/_error');?>
+<?php //echo $this->renderPartial('/upload/_error');?>

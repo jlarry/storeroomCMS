@@ -3,13 +3,13 @@
 /* @var $model Items */
 
 $this->breadcrumbs=array(
-	'Items'=>array('index'),
+	'Equipment'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Items', 'url'=>array('index')),
-	array('label'=>'Create Items', 'url'=>array('create')),
+	array('label'=>'List Equipment', 'url'=>array('index')),
+	array('label'=>'Add Equipment', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Items</h1>
+<h1>Manage Equipment</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
