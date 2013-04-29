@@ -34,7 +34,8 @@ $this->endWidget('zii.widgets.jui.CJuiDialog');
     <img src="<?php echo Yii::app()->getBaseUrl()."/images/items/"; ?>{{:filename}}" />
         <h3>{{:name}}</h3>
         <p><strong>File Name:</strong> {{:filename}}
-        {{:itemcategories_id}} <strong>Category:</strong> {{:itemcategories.name}}</p>
+        <strong>Category:</strong> {{:itemcategories.name}}</p>
+       <input name="Items[itemimage_id]" id="Items_itemimage_id" value="{{:id}}" type="hidden" />
     </li>
 </script>
 <!-- End template -->

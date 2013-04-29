@@ -144,7 +144,7 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`items`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
-  `id` INT(11) NOT NULL ,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `storeroomid` VARCHAR(20) NULL DEFAULT NULL ,
   `niunumber` INT(11) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NOT NULL ,

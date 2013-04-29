@@ -10,7 +10,7 @@
             echo "No image available";
         }
         else{
-            echo CHtml::encode(Yii::app()->baseUrl."/../images/items/".$data->itemimage->filename);
+            echo CHtml::image(CHtml::encode(Yii::app()->baseUrl."/images/items/".$data->itemimage->filename));
         }
         ?>
     </div>   
