@@ -56,15 +56,15 @@ class Items extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, added, storeroomid, description, itemcategories_id', 'required'),
-			array('id, niunumber, po, itemcategories_id, itemimage_id', 'numerical', 'integerOnly'=>true),
+			array('added, storeroomid, description, itemcategories_id', 'required'),
+			array('niunumber, po, itemcategories_id, itemimage_id', 'numerical', 'integerOnly'=>true),
 			array('storeroomid', 'length', 'max'=>20),
 			array('description', 'length', 'max'=>45),
 			array('cost, kits_id', 'length', 'max'=>10),
 			array('purchasedate', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, storeroomid, niunumber, description, po, cost, purchasedate, added, kits_id, itemcategories_id, itemimage_id', 'safe', 'on'=>'search'),
+			array('storeroomid, niunumber, description, po, cost, purchasedate, added, kits_id, itemcategories_id, itemimage_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -136,4 +136,11 @@ class Items extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        public function beforeValidate() {
+            if($this->isNewRecord){
+                $this->added = date('Y-m-d H:i:s');
+                //$this->semester = Semester::getCurrentSemester();
+            }
+            return parent::beforeValidate();
+        }
 }

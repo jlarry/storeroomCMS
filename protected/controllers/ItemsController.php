@@ -66,13 +66,33 @@ class ItemsController extends Controller
                 $kits=Kits::model()->findAll();
                 $itemcategories=Itemcategories::model()->findAll();
                 $itemImage = new Image;
-
+                $newImage = new Itemimage;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Items']))
 		{
-			$model->attributes=$_POST['Items'];
+			if(Yii::app()->user->hasState('images')){
+                            $path = realpath( Yii::app( )->getBasePath( )."/../images/items/" )."/";
+                            //$publicPath = Yii::app( )->getBaseUrl( )."/images/uploads/students/";
+                            $studentImage = Yii::app( )->user->getState( 'images' );
+                            $file = $studentImage[0]['path'];
+                            if(Yii::app()->simpleImage->load($file)){
+                                $img=Yii::app()->simpleImage->load($file);
+                                $img->resizeToWidth(200);
+                                $fileName = substr(microtime( ), 5).".".$studentImage[0]['fileExt'];
+                                $img->save($path.$fileName);
+                                    unlink($studentImage[0]['path']);
+                                    unlink($studentImage[0]['thumb']);
+                                $newImage->filename = $fileName;
+                                $newImage->name = $_POST['Items']['description'];
+                                $newImage->itemcategories_id = $_POST['Items']['itemcategories_id'];
+                                $newImage->save();
+                                $model->itemimage_id = $newImage->id;
+                                Yii::app( )->user->setState( 'images', null );
+                            }
+                        }
+                        $model->attributes=$_POST['Items'];
                        
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
@@ -126,7 +146,10 @@ class ItemsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Items');
+		$criteria = new CDbCriteria;
+                $criteria->with = array('itemimage');
+                $criteria->with = array('itemcategories');
+                $dataProvider=new CActiveDataProvider('Items', array('criteria'=>$criteria));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

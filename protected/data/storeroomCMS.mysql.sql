@@ -67,7 +67,7 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`courses`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`courses` (
-  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `id` INT(10) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `semester` VARCHAR(6) NOT NULL ,
   `year` YEAR NOT NULL ,
@@ -126,7 +126,7 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`kits`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`kits` (
-  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `id` INT(10) NOT NULL AUTO_INCREMENT ,
   `storeroomid` VARCHAR(20) NOT NULL ,
   `itemimage_id` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) ,
@@ -152,7 +152,7 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
   `cost` DECIMAL(10,0) NULL DEFAULT NULL ,
   `purchasedate` DATE NULL DEFAULT NULL ,
   `added` DATETIME NOT NULL ,
-  `kits_id` INT(10) UNSIGNED NULL DEFAULT NULL ,
+  `kits_id` INT(10) NULL DEFAULT NULL ,
   `itemcategories_id` INT(11) NOT NULL ,
   `itemimage_id` INT(11) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
@@ -205,7 +205,7 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`students` (
   `year` INT(11) NOT NULL ,
   `cleared` TEXT NULL DEFAULT NULL ,
   `image` VARCHAR(245) NULL DEFAULT NULL ,
-  `courses_id` INT(10) UNSIGNED NOT NULL ,
+  `courses_id` INT(10) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_students_courses1_idx` (`courses_id` ASC) ,
   CONSTRAINT `fk_students_courses1`
@@ -222,13 +222,13 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`incidents`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`incidents` (
-  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `id` INT(10) NOT NULL AUTO_INCREMENT ,
   `createdon` DATETIME NOT NULL ,
   `note` VARCHAR(200) NULL DEFAULT NULL ,
   `items_id` INT(11) NOT NULL ,
   `attendants_id` INT(11) NOT NULL ,
   `students_id` INT(11) NOT NULL ,
-  `kits_id` INT(10) UNSIGNED NOT NULL ,
+  `kits_id` INT(10) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_incidents_items1_idx` (`items_id` ASC) ,
   INDEX `fk_incidents_attendants1_idx` (`attendants_id` ASC) ,
@@ -381,7 +381,7 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`user`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`user` (
-  `user_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `user_id` INT(10) NOT NULL AUTO_INCREMENT ,
   `first_name` VARCHAR(45) NOT NULL ,
   `last_name` VARCHAR(45) NOT NULL ,
   `username` VARCHAR(45) NOT NULL ,

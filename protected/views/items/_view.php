@@ -4,13 +4,19 @@
 ?>
 
 <div class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
-
+    <div class="viewimage">
+        <?php 
+        if($data->itemimage_id == null){
+            echo "No image available";
+        }
+        else{
+            echo CHtml::encode(Yii::app()->baseUrl."/../images/items/".$data->itemimage->filename);
+        }
+        ?>
+    </div>   
+    <div class="viewdata">   
 	<b><?php echo CHtml::encode($data->getAttributeLabel('storeroomid')); ?>:</b>
-	<?php echo CHtml::encode($data->storeroomid); ?>
+	<?php echo CHtml::link(CHtml::encode($data->storeroomid), array('view', 'id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('niunumber')); ?>:</b>
@@ -32,24 +38,14 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('purchasedate')); ?>:</b>
 	<?php echo CHtml::encode($data->purchasedate); ?>
 	<br />
-
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('added')); ?>:</b>
+        <b><?php echo CHtml::encode($data->getAttributeLabel('added')); ?>:</b>
 	<?php echo CHtml::encode($data->added); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('image')); ?>:</b>
-	<?php echo CHtml::encode($data->image); ?>
+       <b><?php echo CHtml::encode($data->getAttributeLabel('itemcategories_id')); ?>:</b>
+	<?php echo CHtml::encode($data->itemcategories->name); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('kits_id')); ?>:</b>
+	<b><?php echo CHtml::encode("Part of a kit"); ?>:</b>
 	<?php echo CHtml::encode($data->kits_id); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('itemcategories_id')); ?>:</b>
-	<?php echo CHtml::encode($data->itemcategories_id); ?>
-	<br />
-
-	*/ ?>
-
+     </div> <!-- closes viewdata -->
 </div>

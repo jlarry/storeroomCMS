@@ -47,6 +47,11 @@ body
 	font-size: 200%;
 }
 
+#subtag
+{
+    padding: 0px 0px 10px 20px;
+}
+
 #mainmenu
 {
 	background:white url(bg.gif) repeat-x left top;
@@ -133,6 +138,17 @@ div.view
 	padding: 10px;
 	margin: 10px 0;
 	border: 1px solid #C9E0ED;
+}
+
+div.viewimage
+{
+    padding: 5px;
+}
+
+div.viewdata
+{
+    padding: 5px;
+
 }
 
 div.breadcrumbs
