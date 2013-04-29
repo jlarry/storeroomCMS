@@ -72,7 +72,7 @@ class Kits extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'storeroomid' => 'Storeroom ID',
-			'itemimage_id' => 'Itemimage',
+			'itemimage_id' => 'Image',
 		);
 	}
 

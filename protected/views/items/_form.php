@@ -48,9 +48,24 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'purchasedate'); ?>
-		<?php echo $form->textField($model,'purchasedate'); ?>
-		<?php echo $form->error($model,'purchasedate'); ?>
-	</div>
+		<?php //echo $form->textField($model,'purchasedate'); ?>
+
+<?php
+    $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+    'name'=>'Items[purchasedate]',
+    // additional javascript options for the date picker plugin
+    'options'=>array(
+        'showAnim'=>'fold',
+        'dateFormat'=>'yy-mm-dd',
+    ),
+    'htmlOptions'=>array(
+        'style'=>'height:20px;',
+        'id'=>'Items_purchasedate',
+    ),
+));
+?>
+            		<?php echo $form->error($model,'purchasedate'); ?>
+        </div>
 
 	<div class="row">
             <div id="itemImgContainer">
@@ -64,11 +79,17 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'kits_id'); ?>
-		<?php echo $form->dropDownList($model, 'kits_id', CHtml::listData($kits,'id', 'storeroomid'),array('prompt'=>'Groups')); ?>
+		<?php echo $form->dropDownList($model, 'kits_id', CHtml::listData($kits,'id', 'storeroomid'),array('prompt'=>'Equipment Groups')); ?>
 		<?php echo $form->error($model,'kits_id'); ?>
 	</div>
         <div class="row">
-            <?php echo CHtml::button('Add Group', $htmlOptions=array('id'=>'addGroupButton', 'onclick'=>'$("#addGroupDialog").dialog("open")')); ?>
+            <?php //echo CHtml::button('Add New Group', $htmlOptions=array('id'=>'addGroupButton', 'onclick'=>'$("#addGroupDialog").dialog("open")')); ?>
+           <?php $this->widget('zii.widgets.jui.CJuiButton',array(
+    'name'=>'addGroupButton',
+    'caption'=>'Add New Group',
+    'value'=>'',
+    'onclick'=>new CJavaScriptExpression('function(){$("#addGroupDialog").dialog("open"); return false;}'),
+)); ?>
         </div>
 
 	<div class="row">
@@ -77,7 +98,7 @@
 		<?php echo $form->error($model,'itemcategories_id'); ?>
 	</div>
         <div class="row">
-            <?php echo CHtml::button('Add Category', $htmlOptions=array('id'=>'addCatButton', 'onclick'=>'$("#addCatDialog").dialog("open")')); ?>
+            <?php echo CHtml::button('Add New Category', $htmlOptions=array('id'=>'addCatButton', 'onclick'=>'$("#addCatDialog").dialog("open")')); ?>
         </div>
 
 	<div class="row buttons">
@@ -90,13 +111,13 @@
     'id'=>'selectImgDialog',
     // additional javascript options for the dialog plugin
     'options'=>array(
-        'title'=>'Select or Add Image',
+        'title'=>'Select or Add New Image',
         'modal'=>true,
         'autoOpen'=>false,
         'width'=>'450',
         'height'=>'600',
         'resizable'=>false,
-        'buttons'=>array('Add Image'=>'js:function(){$("#addImgDialog").dialog("open");}',
+        'buttons'=>array('Add New Image'=>'js:function(){$("#addImgDialog").dialog("open");}',
             'Cancel'=>'js:function(){$("#selectImgDialog").dialog("close");}',
             ),
     ),

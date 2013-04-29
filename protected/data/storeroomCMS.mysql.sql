@@ -149,7 +149,7 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
   `niunumber` INT(11) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NOT NULL ,
   `po` INT(11) NULL DEFAULT NULL ,
-  `cost` DECIMAL(10,0) NULL DEFAULT NULL ,
+  `cost` DECIMAL(10,2) NULL DEFAULT NULL ,
   `purchasedate` DATE NULL DEFAULT NULL ,
   `added` DATETIME NOT NULL ,
   `kits_id` INT(10) NULL DEFAULT NULL ,

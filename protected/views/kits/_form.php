@@ -45,7 +45,7 @@
     'name'=>'button',
     'caption'=>'Select Image',
     'value'=>'',
-    'onclick'=>new CJavaScriptExpression('function(){ return false;}'),
+    'onclick'=>new CJavaScriptExpression('function(){$("#selectImgDialog").dialog("open"); return false;}'),
 )); ?>
         </div>
         

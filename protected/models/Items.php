@@ -103,7 +103,7 @@ class Items extends CActiveRecord
 			'cost' => 'Cost',
 			'purchasedate' => 'Purchase Date',
 			//'added' => 'Added',
-			'kits_id' => 'Belongs to Kit?',
+			'kits_id' => 'Part of Equipment Group',
 			'itemcategories_id' => 'Category',
 			//'itemimage_id' => 'Itemimage',
 		);

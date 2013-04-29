@@ -2,8 +2,8 @@
 /* @var $this KitsController */
 
 $this->breadcrumbs=array(
-	'Kits'=>array('/kits'),
-	'Create',
+	'Equipment Groups'=>array('/kits'),
+	'Add',
 );
 ?>
 <h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
