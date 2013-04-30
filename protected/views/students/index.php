@@ -3,11 +3,11 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Students',
+	'Manage Students',
 );
 
 $this->menu=array(
-	array('label'=>'Create Students', 'url'=>array('create')),
+	array('label'=>'Add Student', 'url'=>array('create')),
 	array('label'=>'Manage Students', 'url'=>array('admin')),
 );
 ?>
