@@ -30,17 +30,17 @@ $this->breadcrumbs=array(
                'type'=>'html',
                'value'=>array($this,'joinColumns'),
             ),
-            array(
-              'class'=>'CCheckBoxColumn',  
-            ),
         ),
     ));
 ?>
 </div>
-<div id="selectedStudentCnt">
-
+<div id="selectedStudentCnt" style="display: none;">
+    <h3>Selected Students</h3>
+    <table>
+        
+    </table>
 </div>
-<div id="continueButtonCnt" style="visibility: hidden;">
+<div id="continueButtonCnt" style="display: none;">
     <?php    
     $this->widget('zii.widgets.jui.CJuiButton',array(
     'name'=>'continueCheckout',

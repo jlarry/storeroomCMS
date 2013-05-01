@@ -76,5 +76,9 @@ $("#removeImgButton").live('click', function(evt){
 });
 
 $(".items tr").live('dblclick',function(evt){
-   $(this).remove();
+    $("#continueButtonCnt").show();
+    var selectedUser = $(this).html();
+    $(this).remove();
+    $("#selectedStudentCnt table").append('<tr>'+ selectedUser+ '</tr>');
+    $("#selectedStudentCnt").show();
 });
