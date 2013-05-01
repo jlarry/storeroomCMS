@@ -53,7 +53,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		//'image',
 		'cleared',
 		//'courses_id',
-                'courses.name',
+                //'courses.name:text:courses',
 		array(
 			'class'=>'CButtonColumn',
 		),

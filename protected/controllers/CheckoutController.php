@@ -5,9 +5,22 @@ class CheckoutController extends Controller
 	public function actionIndex()
 	{
                 $model = new Students();
-		$this->render('index', array('model'=>$model));
+		//$this->render('index', array('model'=>$model));
+                //$model=new Students('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Students']))
+			$model->attributes=$_GET['Students'];
+
+		$this->render('index',array(
+			'model'=>$model,
+		));
 	}
 
+        public function joinColumns($data,$row)
+        {
+                $columnData = CHtml::encode($data->courses->name." Sec. ".$data->courses->section);
+                return $columnData;
+        }
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

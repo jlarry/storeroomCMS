@@ -74,3 +74,7 @@ $("#removeImgButton").live('click', function(evt){
     $("#itemImgContainer").html(" ");
     $("#selectImgButton").toggle();
 });
+
+$(".items tr").live('dblclick',function(evt){
+   $(this).remove();
+});

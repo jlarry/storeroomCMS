@@ -7,11 +7,14 @@ $this->breadcrumbs=array(
 ?>
 <h1>Checkout Equipment</h1>
 <p>Select Student(s)</p>
-<div id="selectStudentsCnt" style="overflow-y: scroll; height:400px;">
+<div id="selectStudentsCnt" style="overflow-y: auto; max-height:400px;">
 <?php
         $this->widget('zii.widgets.grid.CGridView', array(
+        'id'=>'selectStudent-grid',
         'dataProvider'=>$model->search(),
+        'filter'=>$model,
         'selectableRows'=>'2',
+        //'ajaxUrl'=>Yii::app()->createUrl('students/admin'),
         'columns'=>array(
             array(
                 'name'=>'image',
@@ -21,7 +24,12 @@ $this->breadcrumbs=array(
             'last_name',
             'first_name',
             'cleared',
-            'courses.name',
+            //'courses.name',
+            array(
+               'name'=>'courses',
+               'type'=>'html',
+               'value'=>array($this,'joinColumns'),
+            ),
             array(
               'class'=>'CCheckBoxColumn',  
             ),
@@ -30,12 +38,15 @@ $this->breadcrumbs=array(
 ?>
 </div>
 <div id="selectedStudentCnt">
-<?php    
+
+</div>
+<div id="continueButtonCnt" style="visibility: hidden;">
+    <?php    
     $this->widget('zii.widgets.jui.CJuiButton',array(
-    'name'=>'button',
+    'name'=>'continueCheckout',
     'caption'=>'Continue',
     'options'=>array(
-    'onclick'=>'js:function(){alert("Yes");}',
+    'onclick'=>new CJavaScriptExpression('function(){$("#continueCheckout").alert("Yes");}'),
 )));
 ?>
 </div>
