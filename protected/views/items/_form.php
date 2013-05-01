@@ -57,6 +57,8 @@
     'options'=>array(
         'showAnim'=>'fold',
         'dateFormat'=>'yy-mm-dd',
+        'changeMonth'=> true,
+        'changeYear'=>true,
     ),
     'htmlOptions'=>array(
         'style'=>'height:20px;',

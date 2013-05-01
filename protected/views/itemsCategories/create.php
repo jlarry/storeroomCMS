@@ -2,8 +2,8 @@
 /* @var $this ItemsCategoriesController */
 
 $this->breadcrumbs=array(
-	'Items Categories'=>array('/itemsCategories'),
-	'Create',
+	'Equipment Categories'=>array('/itemsCategories'),
+	'Add',
 );
 ?>
 <h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
