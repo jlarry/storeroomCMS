@@ -143,4 +143,5 @@ class Items extends CActiveRecord
             }
             return parent::beforeValidate();
         }
+        
 }

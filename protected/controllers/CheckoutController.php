@@ -5,6 +5,7 @@ class CheckoutController extends Controller
 	public function actionIndex()
 	{
                 $model = new Students();
+                $availableEquipment = In::model()->search();
 		//$this->render('index', array('model'=>$model));
                 //$model=new Students('search');
 		$model->unsetAttributes();  // clear any default values
@@ -12,7 +13,7 @@ class CheckoutController extends Controller
 			$model->attributes=$_GET['Students'];
 
 		$this->render('index',array(
-			'model'=>$model,
+			'model'=>$model, 'availableEquipment'=>$availableEquipment,
 		));
 	}
 

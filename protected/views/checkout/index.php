@@ -50,3 +50,25 @@ $this->breadcrumbs=array(
 )));
 ?>
 </div>
+<div id="selectEquipmentCnt" style="overflow-y: auto; max-height:400px;">
+<?php
+        $this->widget('zii.widgets.grid.CGridView', array(
+        'id'=>'selectEquipment-grid',
+        'dataProvider'=>$availableEquipment,
+        'filter'=>$availableEquipment,
+        'selectableRows'=>'2',
+        //'ajaxUrl'=>Yii::app()->createUrl('students/admin'),
+        'columns'=>array(
+            array(
+                'name'=>'items.storeroomid',
+                'value'=>'$data->items->storeroomid',
+                'filter'=>'$data->items->storeroomid',
+            ),
+            'items.storeroomid',
+            'items.description',
+            'items.itemcategories.name',
+            
+        ),
+    ));
+?>
+</div>

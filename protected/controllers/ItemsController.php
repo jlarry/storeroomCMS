@@ -95,7 +95,12 @@ class ItemsController extends Controller
                         $model->attributes=$_POST['Items'];
                        
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                            
+                            $inTable = new In;
+                            $inTable->items_id = $model->id;
+                            $inTable->save();
+                            
+                            $this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
