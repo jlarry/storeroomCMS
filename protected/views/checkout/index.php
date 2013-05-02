@@ -6,8 +6,8 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1>Checkout Equipment</h1>
-<p>Select Student(s)</p>
 <div id="selectStudentsCnt" style="overflow-y: auto; max-height:400px;">
+Select Students
 <?php
         $this->widget('zii.widgets.grid.CGridView', array(
         'id'=>'selectStudent-grid',
@@ -40,6 +40,34 @@ $this->breadcrumbs=array(
         
     </table>
 </div>
+<div id="selectEquipmentCnt" style="overflow-y: auto; max-height:400px; display: none;">
+<?php
+        $this->widget('zii.widgets.grid.CGridView', array(
+        'id'=>'selectEquipment-grid',
+        'dataProvider'=>$availableEquipment->search(),
+        'filter'=>$availableEquipment,
+        'selectableRows'=>'2',
+        //'ajaxUrl'=>Yii::app()->createUrl('/admin'),
+        'columns'=>array(
+            array(
+                'name'=>'items.storeroomid',
+                'value'=>'$data->items->storeroomid',
+                'filter'=>'<input name="In[storeroomid]" type="text" maxlength="45" />',
+           ),
+            array(
+                'name'=>'items.description',
+                'value'=>'$data->items->description',
+                'filter'=>'<input name="In[description]" type="text" maxlength="245" />',
+           ),
+            array(
+                'name'=>'items.itemcategories.name',
+                'value'=>'$data->items->itemcategories->name',
+                'filter'=>'<input name="In[category]" type="text" maxlength="45" />',
+            ),
+        ),
+    ));
+?>
+</div>
 <div id="continueButtonCnt" style="display: none;">
     <?php    
     $this->widget('zii.widgets.jui.CJuiButton',array(
@@ -48,27 +76,5 @@ $this->breadcrumbs=array(
     'options'=>array(
     'onclick'=>new CJavaScriptExpression('function(){$("#continueCheckout").alert("Yes");}'),
 )));
-?>
-</div>
-<div id="selectEquipmentCnt" style="overflow-y: auto; max-height:400px;">
-<?php
-        $this->widget('zii.widgets.grid.CGridView', array(
-        'id'=>'selectEquipment-grid',
-        'dataProvider'=>$availableEquipment,
-        'filter'=>$availableEquipment,
-        'selectableRows'=>'2',
-        //'ajaxUrl'=>Yii::app()->createUrl('students/admin'),
-        'columns'=>array(
-            array(
-                'name'=>'items.storeroomid',
-                'value'=>'$data->items->storeroomid',
-                'filter'=>'$data->items->storeroomid',
-            ),
-            'items.storeroomid',
-            'items.description',
-            'items.itemcategories.name',
-            
-        ),
-    ));
 ?>
 </div>
