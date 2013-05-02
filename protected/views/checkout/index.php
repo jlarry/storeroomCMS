@@ -6,6 +6,7 @@ $this->breadcrumbs=array(
 );
 ?>
 <h1>Checkout Equipment</h1>
+<div id="checkoutPanels">
 <div id="selectStudentsCnt" style="overflow-y: auto; max-height:400px;">
 Select Students
 <?php
@@ -33,12 +34,6 @@ Select Students
         ),
     ));
 ?>
-</div>
-<div id="selectedStudentCnt" style="display: none;">
-    <h3>Selected Students</h3>
-    <table>
-        
-    </table>
 </div>
 <div id="selectEquipmentCnt" style="overflow-y: auto; max-height:400px; display: none;">
 <?php
@@ -68,13 +63,21 @@ Select Students
     ));
 ?>
 </div>
+</div><!-- closes checkout panels -->
+<div id="selectedStudentCnt" style="display: none;">
+    <h3>Selected Students</h3>
+    <table>
+        
+    </table>
+</div>
 <div id="continueButtonCnt" style="display: none;">
     <?php    
     $this->widget('zii.widgets.jui.CJuiButton',array(
     'name'=>'continueCheckout',
     'caption'=>'Continue',
     'options'=>array(
-    'onclick'=>new CJavaScriptExpression('function(){$("#continueCheckout").alert("Yes");}'),
+    'onclick'=>new CJavaScriptExpression('function(){$("#continueCheckout").showCheckoutPanels(); return false;}'),
 )));
 ?>
+    <input type="button" name="continueCheckout" id="continueCheckout" onclick="$('#continueCheckout').showCheckoutPanels();"/>
 </div>
