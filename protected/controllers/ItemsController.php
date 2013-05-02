@@ -96,9 +96,11 @@ class ItemsController extends Controller
                        
 			if($model->save())
                             
-                            $inTable = new In;
-                            $inTable->items_id = $model->id;
-                            $inTable->save();
+                            if($model->kits_id == null){
+                                $inTable = new In;
+                                $inTable->items_id = $model->id;
+                                $inTable->save();
+                            }
                             
                             $this->redirect(array('view','id'=>$model->id));
 		}

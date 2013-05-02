@@ -4,6 +4,7 @@ class CheckoutController extends Controller
 {
 	public function actionIndex()
 	{
+                
                 $model = new Students();
                 $availableEquipment = In::model()->search();
 		//$this->render('index', array('model'=>$model));
@@ -21,6 +22,13 @@ class CheckoutController extends Controller
         {
                 $columnData = CHtml::encode($data->courses->name." Sec. ".$data->courses->section);
                 return $columnData;
+        }
+        
+        public function actionCheckout(){
+            
+                $transactid = substr(microtime(), 11);
+            
+            
         }
 	// Uncomment the following methods and override them if needed
 	/*

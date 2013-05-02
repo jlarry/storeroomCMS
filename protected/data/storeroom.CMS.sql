@@ -21,21 +21,6 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `storeroom`.`attendants`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `storeroom`.`attendants` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `first_name` VARCHAR(45) NOT NULL ,
-  `last_name` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(45) NOT NULL ,
-  `pwhash` VARCHAR(45) NOT NULL ,
-  `lastlogin` DATETIME NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
 -- Table `storeroom`.`instructors`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`instructors` (
@@ -100,6 +85,7 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`itemcategories` (
   `name` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -119,6 +105,7 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`itemimage` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -128,7 +115,7 @@ DEFAULT CHARACTER SET = latin1;
 CREATE  TABLE IF NOT EXISTS `storeroom`.`kits` (
   `id` INT(10) NOT NULL AUTO_INCREMENT ,
   `storeroomid` VARCHAR(20) NOT NULL ,
-  `itemimage_id` INT(11) NOT NULL ,
+  `itemimage_id` INT(11) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_kits_itemimage1_idx` (`itemimage_id` ASC) ,
   CONSTRAINT `fk_kits_itemimage1`
@@ -144,7 +131,7 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`items`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `storeroomid` VARCHAR(20) NULL DEFAULT NULL ,
   `niunumber` INT(11) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NOT NULL ,
@@ -159,11 +146,6 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
   INDEX `fk_items_kits1_idx` (`kits_id` ASC) ,
   INDEX `fk_items_itemcategories1_idx` (`itemcategories_id` ASC) ,
   INDEX `fk_items_itemimage1_idx` (`itemimage_id` ASC) ,
-  CONSTRAINT `fk_items_kits1`
-    FOREIGN KEY (`kits_id` )
-    REFERENCES `storeroom`.`kits` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_items_itemcategories1`
     FOREIGN KEY (`itemcategories_id` )
     REFERENCES `storeroom`.`itemcategories` (`id` )
@@ -173,8 +155,14 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`items` (
     FOREIGN KEY (`itemimage_id` )
     REFERENCES `storeroom`.`itemimage` (`id` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_items_kits1`
+    FOREIGN KEY (`kits_id` )
+    REFERENCES `storeroom`.`kits` (`id` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -182,11 +170,17 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`in`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`in` (
-  `items_id` INT(11) NOT NULL ,
-  PRIMARY KEY (`items_id`) ,
-  CONSTRAINT `fk_in_items1`
+  `items_id` INT(11) NULL ,
+  `kits_id` INT(10) NULL ,
+  INDEX `fk_in_kits1_idx` (`kits_id` ASC) ,
+  CONSTRAINT `in_ibfk_1`
     FOREIGN KEY (`items_id` )
     REFERENCES `storeroom`.`items` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_in_kits1`
+    FOREIGN KEY (`kits_id` )
+    REFERENCES `storeroom`.`kits` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -214,7 +208,25 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`students` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `storeroom`.`user`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `storeroom`.`user` (
+  `user_id` INT(10) NOT NULL AUTO_INCREMENT ,
+  `first_name` VARCHAR(45) NOT NULL ,
+  `last_name` VARCHAR(45) NOT NULL ,
+  `username` VARCHAR(45) NOT NULL ,
+  `password` VARCHAR(45) NOT NULL ,
+  `title` VARCHAR(45) NOT NULL ,
+  `email` VARCHAR(45) NOT NULL ,
+  `image` VARCHAR(245) NULL DEFAULT NULL ,
+  `lastlogin` DATETIME NULL DEFAULT NULL ,
+  PRIMARY KEY (`user_id`) )
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -225,23 +237,23 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`incidents` (
   `id` INT(10) NOT NULL AUTO_INCREMENT ,
   `createdon` DATETIME NOT NULL ,
   `note` VARCHAR(200) NULL DEFAULT NULL ,
-  `items_id` INT(11) NOT NULL ,
-  `attendants_id` INT(11) NOT NULL ,
+  `items_id` INT(11) NULL ,
   `students_id` INT(11) NOT NULL ,
-  `kits_id` INT(10) NOT NULL ,
+  `kits_id` INT(10) NULL ,
+  `user_user_id` INT(10) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_incidents_items1_idx` (`items_id` ASC) ,
-  INDEX `fk_incidents_attendants1_idx` (`attendants_id` ASC) ,
   INDEX `fk_incidents_students1_idx` (`students_id` ASC) ,
   INDEX `fk_incidents_kits1_idx` (`kits_id` ASC) ,
+  INDEX `fk_incidents_user1_idx` (`user_user_id` ASC) ,
   CONSTRAINT `fk_incidents_items1`
     FOREIGN KEY (`items_id` )
     REFERENCES `storeroom`.`items` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidents_attendants1`
-    FOREIGN KEY (`attendants_id` )
-    REFERENCES `storeroom`.`attendants` (`id` )
+  CONSTRAINT `fk_incidents_kits1`
+    FOREIGN KEY (`kits_id` )
+    REFERENCES `storeroom`.`kits` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_incidents_students1`
@@ -249,9 +261,9 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`incidents` (
     REFERENCES `storeroom`.`students` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_incidents_kits1`
-    FOREIGN KEY (`kits_id` )
-    REFERENCES `storeroom`.`kits` (`id` )
+  CONSTRAINT `fk_incidents_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `storeroom`.`user` (`user_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -264,24 +276,24 @@ DEFAULT CHARACTER SET = latin1;
 CREATE  TABLE IF NOT EXISTS `storeroom`.`inhistory` (
   `indate` DATETIME NOT NULL ,
   `items_id` INT(11) NOT NULL ,
-  `attendants_id` INT(11) NOT NULL ,
   `students_id` INT(11) NOT NULL ,
+  `user_user_id` INT(10) NOT NULL ,
   PRIMARY KEY (`items_id`) ,
-  INDEX `fk_inhistory_attendants1_idx` (`attendants_id` ASC) ,
   INDEX `fk_inhistory_students1_idx` (`students_id` ASC) ,
+  INDEX `fk_inhistory_user1_idx` (`user_user_id` ASC) ,
   CONSTRAINT `fk_inhistory_items1`
     FOREIGN KEY (`items_id` )
     REFERENCES `storeroom`.`items` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_inhistory_attendants1`
-    FOREIGN KEY (`attendants_id` )
-    REFERENCES `storeroom`.`attendants` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_inhistory_students1`
     FOREIGN KEY (`students_id` )
     REFERENCES `storeroom`.`students` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_inhistory_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `storeroom`.`user` (`user_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -296,12 +308,18 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`notes` (
   `description` VARCHAR(200) NULL DEFAULT NULL ,
   `createdon` DATETIME NOT NULL ,
   `items_id` INT(11) NOT NULL ,
-  `attendants_id` INT(11) NOT NULL ,
+  `user_user_id` INT(10) NOT NULL ,
   PRIMARY KEY (`id`, `items_id`) ,
   INDEX `fk_notes_items1_idx` (`items_id` ASC) ,
+  INDEX `fk_notes_user1_idx` (`user_user_id` ASC) ,
   CONSTRAINT `fk_notes_items1`
     FOREIGN KEY (`items_id` )
     REFERENCES `storeroom`.`items` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notes_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `storeroom`.`user` (`user_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -327,26 +345,34 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `storeroom`.`outhistory`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `storeroom`.`outhistory` (
+  `transactid` INT(11) NOT NULL ,
   `outdate` DATETIME NOT NULL ,
-  `items_id` INT(11) NOT NULL ,
-  `attendants_id` INT(11) NOT NULL ,
   `students_id` INT(11) NOT NULL ,
-  PRIMARY KEY (`items_id`) ,
-  INDEX `fk_outhistory_attendants1_idx` (`attendants_id` ASC) ,
+  `kits_id` INT(11) NULL DEFAULT NULL ,
+  `items_id` INT(11) NULL ,
+  `user_user_id` INT(10) NOT NULL ,
   INDEX `fk_outhistory_students1_idx` (`students_id` ASC) ,
+  INDEX `kits_id` (`kits_id` ASC) ,
+  INDEX `fk_outhistory_items1_idx` (`items_id` ASC) ,
+  INDEX `fk_outhistory_user1_idx` (`user_user_id` ASC) ,
+  CONSTRAINT `fk_outhistory_students1`
+    FOREIGN KEY (`students_id` )
+    REFERENCES `storeroom`.`students` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `outhistory_ibfk_1`
+    FOREIGN KEY (`kits_id` )
+    REFERENCES `storeroom`.`kits` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_outhistory_items1`
     FOREIGN KEY (`items_id` )
     REFERENCES `storeroom`.`items` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_outhistory_attendants1`
-    FOREIGN KEY (`attendants_id` )
-    REFERENCES `storeroom`.`attendants` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_outhistory_students1`
-    FOREIGN KEY (`students_id` )
-    REFERENCES `storeroom`.`students` (`id` )
+  CONSTRAINT `fk_outhistory_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `storeroom`.`user` (`user_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -360,37 +386,19 @@ CREATE  TABLE IF NOT EXISTS `storeroom`.`outofservice` (
   `createdon` DATETIME NOT NULL ,
   `note` VARCHAR(200) NULL DEFAULT NULL ,
   `items_id` INT(11) NOT NULL ,
-  `attendants_id` INT(11) NOT NULL ,
+  `user_user_id` INT(10) NOT NULL ,
   INDEX `fk_outofservice_items1_idx` (`items_id` ASC) ,
-  INDEX `fk_outofservice_attendants1_idx` (`attendants_id` ASC) ,
+  INDEX `fk_outofservice_user1_idx` (`user_user_id` ASC) ,
   CONSTRAINT `fk_outofservice_items1`
     FOREIGN KEY (`items_id` )
     REFERENCES `storeroom`.`items` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_outofservice_attendants1`
-    FOREIGN KEY (`attendants_id` )
-    REFERENCES `storeroom`.`attendants` (`id` )
+  CONSTRAINT `fk_outofservice_user1`
+    FOREIGN KEY (`user_user_id` )
+    REFERENCES `storeroom`.`user` (`user_id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `storeroom`.`user`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `storeroom`.`user` (
-  `user_id` INT(10) NOT NULL AUTO_INCREMENT ,
-  `first_name` VARCHAR(45) NOT NULL ,
-  `last_name` VARCHAR(45) NOT NULL ,
-  `username` VARCHAR(45) NOT NULL ,
-  `password` VARCHAR(45) NOT NULL ,
-  `title` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(45) NOT NULL ,
-  `image` VARCHAR(245) NULL DEFAULT NULL ,
-  `lastlogin` DATETIME NULL DEFAULT NULL ,
-  PRIMARY KEY (`user_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 

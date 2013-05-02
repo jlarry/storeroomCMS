@@ -14,6 +14,9 @@ class KitsController extends Controller
 			$model->attributes=$_POST['Kits'];
                        
 			if($model->save()){
+                                $inTable = new In;
+                                $inTable->kits_id = $model->id;
+                                $inTable->save();
                             if(Yii::app()->request->isAjaxRequest){
                                  echo CJSON::encode(array(
                                      'status'=>'success',
