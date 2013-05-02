@@ -65,6 +65,11 @@ $.fn.addSelectedImg = function(event){
     //'<img src="'+imgUrl+'"/><button id="removeImgButton" type="button">Remove Image</button>'
     
 };
+
+$.fn.showCheckoutPanels = function(event){
+    $("#selectStudentsCnt").hide();
+    $("#selectEquipmentCnt").show("slide");
+};
 //adds click to <li> image selection list in select image dialog box for adding Equipment
 $("#itemUlList li").live('click', function(evt){
     $(this).addSelectedImg(evt);

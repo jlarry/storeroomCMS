@@ -12,6 +12,8 @@
 class In extends CActiveRecord
 {
 	public $storeroomid;
+        public $description;
+        public $category;
         /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -40,9 +42,10 @@ class In extends CActiveRecord
 		return array(
 			array('items_id', 'required'),
 			array('items_id', 'numerical', 'integerOnly'=>true),
+                        array('storeroomid, description', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('items_id, storeroomid', 'safe', 'on'=>'search'),
+			array('items_id, storeroomid, description, category', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +68,9 @@ class In extends CActiveRecord
 	{
 		return array(
 			'items_id' => 'Equipment',
+                        'storeroomid'=>'Storeroom ID',
+                        'description'=>'Equipment Description',
+                        'category'=>'Equipment Category',
 		);
 	}
 
@@ -82,6 +88,8 @@ class In extends CActiveRecord
 		$criteria->compare('items_id',$this->items_id);
                 $criteria->with = array('items');
                 $criteria->compare('items.storeroomid',$this->storeroomid, true);
+                $criteria->compare('items.description', $this->description, true);
+                $criteria->compare('items.itemcategories.name', $this->category, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

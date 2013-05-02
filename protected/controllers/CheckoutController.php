@@ -6,13 +6,18 @@ class CheckoutController extends Controller
 	{
                 
                 $model = new Students();
-                $availableEquipment = In::model()->search();
+                $availableEquipment = new In();//In::model()->search();
 		//$this->render('index', array('model'=>$model));
                 //$model=new Students('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Students']))
+		if(isset($_GET['Students'])){
 			$model->attributes=$_GET['Students'];
-
+                }
+                elseif(isset($_GET['In'])){
+                        $availableEquipment = new In();
+                        $availableEquipment->unsetAttributes();
+                        $availableEquipment->attributes=$_GET['In'];
+                }
 		$this->render('index',array(
 			'model'=>$model, 'availableEquipment'=>$availableEquipment,
 		));
